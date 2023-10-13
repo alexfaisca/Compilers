@@ -10,3 +10,17 @@ The MML compiler is comprised of:
 * type checker (`targets/type_checker.cpp`)
 * XML writer (for the middle delivery: `targets/xml_writer.cpp`)
 * Postfix writer (for the final delivery: `targets/postfix_writer.cpp`)
+
+## Usage
+
+- Compile source code to .asm file
+
+    ./mml test.mml
+
+- Assemble .asm file onto .o file
+
+    yasm -felf32 test.asm
+    
+- Link .o file onto executable
+
+    ld -m elf_i386 -o test test.o -L base/lib/ -lrts
