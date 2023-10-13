@@ -105,78 +105,80 @@ Grammar
    75     | args ',' expr
 
    76 lval: tIDENTIFIER
-   77     | expr '[' expr ']'
+   77     | lval '[' expr ']'
+   78     | '(' expr ')' '[' expr ']'
 
-   78 expr: integer
-   79     | real
-   80     | string
-   81     | tNULLPTR
-   82     | lval
-   83     | lval '=' expr
-   84     | expr '+' expr
-   85     | expr '-' expr
-   86     | expr '*' expr
-   87     | expr '/' expr
-   88     | expr '%' expr
-   89     | expr '<' expr
-   90     | expr '>' expr
-   91     | expr tGE expr
-   92     | expr tLE expr
-   93     | expr tNE expr
-   94     | expr tEQ expr
-   95     | expr tAND expr
-   96     | expr tOR expr
-   97     | '-' expr
-   98     | '+' expr
-   99     | lval tADDRESSOF
-  100     | tNOT expr
-  101     | tREAD
-  102     | fdef
-  103     | fcall
-  104     | tSIZEOF '(' expr ')'
-  105     | '(' expr ')'
-  106     | '[' expr ']'
+   79 expr: integer
+   80     | real
+   81     | string
+   82     | tNULLPTR
+   83     | lval
+   84     | lval '=' expr
+   85     | expr '+' expr
+   86     | expr '-' expr
+   87     | expr '*' expr
+   88     | expr '/' expr
+   89     | expr '%' expr
+   90     | expr '<' expr
+   91     | expr '>' expr
+   92     | expr tGE expr
+   93     | expr tLE expr
+   94     | expr tNE expr
+   95     | expr tEQ expr
+   96     | expr tAND expr
+   97     | expr tOR expr
+   98     | '-' expr
+   99     | '+' expr
+  100     | lval tADDRESSOF
+  101     | '~' expr
+  102     | tREAD
+  103     | fdef
+  104     | fcall
+  105     | tSIZEOF '(' expr ')'
+  106     | '(' expr ')'
+  107     | '[' expr ']'
 
-  107 integer: tINTEGER
+  108 integer: tINTEGER
 
-  108 real: tREAL
+  109 real: tREAL
 
-  109 string: tSTRING
-  110       | string tSTRING
+  110 string: tSTRING
+  111       | string tSTRING
 
 
 Terminals, with rules where they appear
 
     $end (0) 0
-    '%' (37) 88
-    '(' (40) 16 17 18 23 24 29 30 53 54 55 56 104 105
-    ')' (41) 16 17 18 23 24 29 30 53 54 55 56 104 105
-    '*' (42) 86
-    '+' (43) 84 98
+    '%' (37) 89
+    '(' (40) 16 17 18 23 24 29 30 53 54 55 56 78 105 106
+    ')' (41) 16 17 18 23 24 29 30 53 54 55 56 78 105 106
+    '*' (42) 87
+    '+' (43) 85 99
     ',' (44) 51 71 75
-    '-' (45) 85 97
-    '/' (47) 87
+    '-' (45) 86 98
+    '/' (47) 88
     ';' (59) 9 10 13 20 21 22 26 32 33 34
-    '<' (60) 52 89
-    '=' (61) 39 40 41 58 83
-    '>' (62) 52 90
-    '[' (91) 46 77 106
-    ']' (93) 46 77 106
+    '<' (60) 52 90
+    '=' (61) 39 40 41 58 84
+    '>' (62) 52 91
+    '[' (91) 46 77 78 107
+    ']' (93) 46 77 78 107
     '{' (123) 59 60 61 62
     '}' (125) 59 60 61 62
+    '~' (126) 101
     error (256)
-    tINTEGER <i> (258) 64 66 107
-    tREAL <d> (259) 108
+    tINTEGER <i> (258) 64 66 108
+    tREAL <d> (259) 109
     tIDENTIFIER <s> (260) 35 36 37 38 39 40 41 72 76
-    tSTRING <s> (261) 109 110
-    tNULLPTR <expression> (262) 81
+    tSTRING <s> (261) 110 111
+    tNULLPTR <expression> (262) 82
     tWHILE (263) 16 29
     tIF (264) 17 18 30
     tBEGIN (265) 5 6 7 8
     tEND (266) 5 6 7 8
     tWRITE (267) 14 27
     tWRITELN (268) 15 28
-    tREAD (269) 101
+    tREAD (269) 102
     tARROW (270) 53
     tTYPE_STRING (271) 42
     tTYPE_INT (272) 43
@@ -191,19 +193,18 @@ Terminals, with rules where they appear
     tNEXT (281) 65 66
     tRETURN (282) 67 68
     tRECURSION (283) 56
-    tSIZEOF (284) 104
-    tADDRESSOF (285) 99
-    tNOT (286) 100
-    tIFX (287)
-    tELIF (288) 23 24
-    tELSE (289) 25
-    tUNARY (290)
-    tOR (291) 96
-    tAND (292) 95
-    tGE (293) 91
-    tLE (294) 92
-    tEQ (295) 94
-    tNE (296) 93
+    tSIZEOF (284) 105
+    tADDRESSOF (285) 100
+    tIFX (286)
+    tELIF (287) 23 24
+    tELSE (288) 25
+    tUNARY (289)
+    tOR (290) 97
+    tAND (291) 96
+    tGE (292) 92
+    tLE (293) 93
+    tEQ (294) 95
+    tNE (295) 94
 
 
 Nonterminals, with rules where they appear
@@ -248,10 +249,10 @@ Nonterminals, with rules where they appear
         on right: 36 47
     fdef <expression> (71)
         on left: 53
-        on right: 102
+        on right: 103
     fcall <expression> (72)
         on left: 54 55 56
-        on right: 103
+        on right: 104
     opt_initializer <expression> (73)
         on left: 57 58
         on right: 35 38
@@ -277,20 +278,20 @@ Nonterminals, with rules where they appear
         on left: 73 74 75
         on right: 14 15 27 28 54 55 56 75
     lval <lvalue> (81)
-        on left: 76 77
-        on right: 54 82 83 99
+        on left: 76 77 78
+        on right: 54 77 83 84 100
     expr <expression> (82)
-        on left: 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106
-        on right: 13 16 17 18 23 24 26 29 30 39 40 41 55 58 68 74 75 77 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 100 104 105 106
+        on left: 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107
+        on right: 13 16 17 18 23 24 26 29 30 39 40 41 55 58 68 74 75 77 78 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 101 105 106 107
     integer <expression> (83)
-        on left: 107
-        on right: 78
-    real <expression> (84)
         on left: 108
         on right: 79
+    real <expression> (84)
+        on left: 109
+        on right: 80
     string <s> (85)
-        on left: 109 110
-        on right: 80 110
+        on left: 110 111
+        on right: 81 111
 
 
 State 0
@@ -347,12 +348,12 @@ State 1
     tRETURN       shift, and go to state 28
     tRECURSION    shift, and go to state 29
     tSIZEOF       shift, and go to state 30
-    tNOT          shift, and go to state 31
-    '('           shift, and go to state 32
-    '['           shift, and go to state 33
-    '+'           shift, and go to state 34
-    '-'           shift, and go to state 35
-    '{'           shift, and go to state 36
+    '+'           shift, and go to state 31
+    '-'           shift, and go to state 32
+    '('           shift, and go to state 33
+    '['           shift, and go to state 34
+    '{'           shift, and go to state 35
+    '~'           shift, and go to state 36
 
     $default  reduce using rule 73 (args)
 
@@ -535,16 +536,16 @@ State 16
 
 State 17
 
-  107 integer: tINTEGER •
+  108 integer: tINTEGER •
 
-    $default  reduce using rule 107 (integer)
+    $default  reduce using rule 108 (integer)
 
 
 State 18
 
-  108 real: tREAL •
+  109 real: tREAL •
 
-    $default  reduce using rule 108 (real)
+    $default  reduce using rule 109 (real)
 
 
 State 19
@@ -556,16 +557,16 @@ State 19
 
 State 20
 
-  109 string: tSTRING •
+  110 string: tSTRING •
 
-    $default  reduce using rule 109 (string)
+    $default  reduce using rule 110 (string)
 
 
 State 21
 
-   81 expr: tNULLPTR •
+   82 expr: tNULLPTR •
 
-    $default  reduce using rule 81 (expr)
+    $default  reduce using rule 82 (expr)
 
 
 State 22
@@ -592,9 +593,9 @@ State 24
 
 State 25
 
-  101 expr: tREAD •
+  102 expr: tREAD •
 
-    $default  reduce using rule 101 (expr)
+    $default  reduce using rule 102 (expr)
 
 
 State 26
@@ -630,11 +631,11 @@ State 28
     tREAD        shift, and go to state 25
     tRECURSION   shift, and go to state 29
     tSIZEOF      shift, and go to state 30
-    tNOT         shift, and go to state 31
-    '('          shift, and go to state 32
+    '+'          shift, and go to state 31
+    '-'          shift, and go to state 32
+    '('          shift, and go to state 33
     '['          shift, and go to state 70
-    '+'          shift, and go to state 34
-    '-'          shift, and go to state 35
+    '~'          shift, and go to state 36
 
     $default  reduce using rule 67 (return)
 
@@ -656,14 +657,14 @@ State 29
 
 State 30
 
-  104 expr: tSIZEOF • '(' expr ')'
+  105 expr: tSIZEOF • '(' expr ')'
 
     '('  shift, and go to state 73
 
 
 State 31
 
-  100 expr: tNOT • expr
+   99 expr: '+' • expr
 
     tINTEGER     shift, and go to state 17
     tREAL        shift, and go to state 18
@@ -673,11 +674,11 @@ State 31
     tREAD        shift, and go to state 25
     tRECURSION   shift, and go to state 29
     tSIZEOF      shift, and go to state 30
-    tNOT         shift, and go to state 31
-    '('          shift, and go to state 32
+    '+'          shift, and go to state 31
+    '-'          shift, and go to state 32
+    '('          shift, and go to state 33
     '['          shift, and go to state 70
-    '+'          shift, and go to state 34
-    '-'          shift, and go to state 35
+    '~'          shift, and go to state 36
 
     fdef     go to state 40
     fcall    go to state 41
@@ -690,47 +691,37 @@ State 31
 
 State 32
 
-   53 fdef: '(' • argdecs ')' tARROW data_type block
-   55 fcall: '(' • expr ')' '(' args ')'
-  105 expr: '(' • expr ')'
+   98 expr: '-' • expr
 
-    tINTEGER      shift, and go to state 17
-    tREAL         shift, and go to state 18
-    tIDENTIFIER   shift, and go to state 19
-    tSTRING       shift, and go to state 20
-    tNULLPTR      shift, and go to state 21
-    tREAD         shift, and go to state 25
-    tTYPE_STRING  shift, and go to state 2
-    tTYPE_INT     shift, and go to state 3
-    tTYPE_REAL    shift, and go to state 4
-    tTYPE_VOID    shift, and go to state 5
-    tRECURSION    shift, and go to state 29
-    tSIZEOF       shift, and go to state 30
-    tNOT          shift, and go to state 31
-    '('           shift, and go to state 32
-    '['           shift, and go to state 33
-    '+'           shift, and go to state 34
-    '-'           shift, and go to state 35
+    tINTEGER     shift, and go to state 17
+    tREAL        shift, and go to state 18
+    tIDENTIFIER  shift, and go to state 19
+    tSTRING      shift, and go to state 20
+    tNULLPTR     shift, and go to state 21
+    tREAD        shift, and go to state 25
+    tRECURSION   shift, and go to state 29
+    tSIZEOF      shift, and go to state 30
+    '+'          shift, and go to state 31
+    '-'          shift, and go to state 32
+    '('          shift, and go to state 33
+    '['          shift, and go to state 70
+    '~'          shift, and go to state 36
 
-    $default  reduce using rule 69 (argdecs)
-
-    data_type  go to state 75
-    func_type  go to state 16
-    fdef       go to state 40
-    fcall      go to state 41
-    argdecs    go to state 76
-    argdec     go to state 77
-    lval       go to state 47
-    expr       go to state 78
-    integer    go to state 49
-    real       go to state 50
-    string     go to state 51
+    fdef     go to state 40
+    fcall    go to state 41
+    lval     go to state 47
+    expr     go to state 75
+    integer  go to state 49
+    real     go to state 50
+    string   go to state 51
 
 
 State 33
 
-   46 data_type: '[' • data_type ']'
-  106 expr: '[' • expr ']'
+   53 fdef: '(' • argdecs ')' tARROW data_type block
+   55 fcall: '(' • expr ')' '(' args ')'
+   78 lval: '(' • expr ')' '[' expr ']'
+  106 expr: '(' • expr ')'
 
     tINTEGER      shift, and go to state 17
     tREAL         shift, and go to state 18
@@ -744,16 +735,20 @@ State 33
     tTYPE_VOID    shift, and go to state 5
     tRECURSION    shift, and go to state 29
     tSIZEOF       shift, and go to state 30
-    tNOT          shift, and go to state 31
-    '('           shift, and go to state 32
-    '['           shift, and go to state 33
-    '+'           shift, and go to state 34
-    '-'           shift, and go to state 35
+    '+'           shift, and go to state 31
+    '-'           shift, and go to state 32
+    '('           shift, and go to state 33
+    '['           shift, and go to state 34
+    '~'           shift, and go to state 36
 
-    data_type  go to state 59
+    $default  reduce using rule 69 (argdecs)
+
+    data_type  go to state 76
     func_type  go to state 16
     fdef       go to state 40
     fcall      go to state 41
+    argdecs    go to state 77
+    argdec     go to state 78
     lval       go to state 47
     expr       go to state 79
     integer    go to state 49
@@ -763,59 +758,39 @@ State 33
 
 State 34
 
-   98 expr: '+' • expr
+   46 data_type: '[' • data_type ']'
+  107 expr: '[' • expr ']'
 
-    tINTEGER     shift, and go to state 17
-    tREAL        shift, and go to state 18
-    tIDENTIFIER  shift, and go to state 19
-    tSTRING      shift, and go to state 20
-    tNULLPTR     shift, and go to state 21
-    tREAD        shift, and go to state 25
-    tRECURSION   shift, and go to state 29
-    tSIZEOF      shift, and go to state 30
-    tNOT         shift, and go to state 31
-    '('          shift, and go to state 32
-    '['          shift, and go to state 70
-    '+'          shift, and go to state 34
-    '-'          shift, and go to state 35
+    tINTEGER      shift, and go to state 17
+    tREAL         shift, and go to state 18
+    tIDENTIFIER   shift, and go to state 19
+    tSTRING       shift, and go to state 20
+    tNULLPTR      shift, and go to state 21
+    tREAD         shift, and go to state 25
+    tTYPE_STRING  shift, and go to state 2
+    tTYPE_INT     shift, and go to state 3
+    tTYPE_REAL    shift, and go to state 4
+    tTYPE_VOID    shift, and go to state 5
+    tRECURSION    shift, and go to state 29
+    tSIZEOF       shift, and go to state 30
+    '+'           shift, and go to state 31
+    '-'           shift, and go to state 32
+    '('           shift, and go to state 33
+    '['           shift, and go to state 34
+    '~'           shift, and go to state 36
 
-    fdef     go to state 40
-    fcall    go to state 41
-    lval     go to state 47
-    expr     go to state 80
-    integer  go to state 49
-    real     go to state 50
-    string   go to state 51
+    data_type  go to state 59
+    func_type  go to state 16
+    fdef       go to state 40
+    fcall      go to state 41
+    lval       go to state 47
+    expr       go to state 80
+    integer    go to state 49
+    real       go to state 50
+    string     go to state 51
 
 
 State 35
-
-   97 expr: '-' • expr
-
-    tINTEGER     shift, and go to state 17
-    tREAL        shift, and go to state 18
-    tIDENTIFIER  shift, and go to state 19
-    tSTRING      shift, and go to state 20
-    tNULLPTR     shift, and go to state 21
-    tREAD        shift, and go to state 25
-    tRECURSION   shift, and go to state 29
-    tSIZEOF      shift, and go to state 30
-    tNOT         shift, and go to state 31
-    '('          shift, and go to state 32
-    '['          shift, and go to state 70
-    '+'          shift, and go to state 34
-    '-'          shift, and go to state 35
-
-    fdef     go to state 40
-    fcall    go to state 41
-    lval     go to state 47
-    expr     go to state 81
-    integer  go to state 49
-    real     go to state 50
-    string   go to state 51
-
-
-State 36
 
    59 block: '{' • '}'
    60      | '{' • vardecs '}'
@@ -843,18 +818,18 @@ State 36
     tRETURN       shift, and go to state 28
     tRECURSION    shift, and go to state 29
     tSIZEOF       shift, and go to state 30
-    tNOT          shift, and go to state 31
-    '('           shift, and go to state 32
-    '['           shift, and go to state 33
-    '+'           shift, and go to state 34
-    '-'           shift, and go to state 35
-    '{'           shift, and go to state 36
-    '}'           shift, and go to state 82
+    '+'           shift, and go to state 31
+    '-'           shift, and go to state 32
+    '('           shift, and go to state 33
+    '['           shift, and go to state 34
+    '{'           shift, and go to state 35
+    '}'           shift, and go to state 81
+    '~'           shift, and go to state 36
 
     $default  reduce using rule 73 (args)
 
-    vardecs       go to state 83
-    instructions  go to state 84
+    vardecs       go to state 82
+    instructions  go to state 83
     instruction   go to state 39
     vardec        go to state 14
     data_type     go to state 15
@@ -871,6 +846,33 @@ State 36
     integer       go to state 49
     real          go to state 50
     string        go to state 51
+
+
+State 36
+
+  101 expr: '~' • expr
+
+    tINTEGER     shift, and go to state 17
+    tREAL        shift, and go to state 18
+    tIDENTIFIER  shift, and go to state 19
+    tSTRING      shift, and go to state 20
+    tNULLPTR     shift, and go to state 21
+    tREAD        shift, and go to state 25
+    tRECURSION   shift, and go to state 29
+    tSIZEOF      shift, and go to state 30
+    '+'          shift, and go to state 31
+    '-'          shift, and go to state 32
+    '('          shift, and go to state 33
+    '['          shift, and go to state 70
+    '~'          shift, and go to state 36
+
+    fdef     go to state 40
+    fcall    go to state 41
+    lval     go to state 47
+    expr     go to state 84
+    integer  go to state 49
+    real     go to state 50
+    string   go to state 51
 
 
 State 37
@@ -901,12 +903,12 @@ State 37
     tRETURN       shift, and go to state 28
     tRECURSION    shift, and go to state 29
     tSIZEOF       shift, and go to state 30
-    tNOT          shift, and go to state 31
-    '('           shift, and go to state 32
-    '['           shift, and go to state 33
-    '+'           shift, and go to state 34
-    '-'           shift, and go to state 35
-    '{'           shift, and go to state 36
+    '+'           shift, and go to state 31
+    '-'           shift, and go to state 32
+    '('           shift, and go to state 33
+    '['           shift, and go to state 34
+    '{'           shift, and go to state 35
+    '~'           shift, and go to state 36
 
     $default  reduce using rule 73 (args)
 
@@ -948,12 +950,12 @@ State 38
     tRETURN      shift, and go to state 28
     tRECURSION   shift, and go to state 29
     tSIZEOF      shift, and go to state 30
-    tNOT         shift, and go to state 31
-    '('          shift, and go to state 32
+    '+'          shift, and go to state 31
+    '-'          shift, and go to state 32
+    '('          shift, and go to state 33
     '['          shift, and go to state 70
-    '+'          shift, and go to state 34
-    '-'          shift, and go to state 35
-    '{'          shift, and go to state 36
+    '{'          shift, and go to state 35
+    '~'          shift, and go to state 36
 
     $default  reduce using rule 73 (args)
 
@@ -981,16 +983,16 @@ State 39
 
 State 40
 
-  102 expr: fdef •
+  103 expr: fdef •
 
-    $default  reduce using rule 102 (expr)
+    $default  reduce using rule 103 (expr)
 
 
 State 41
 
-  103 expr: fcall •
+  104 expr: fcall •
 
-    $default  reduce using rule 103 (expr)
+    $default  reduce using rule 104 (expr)
 
 
 State 42
@@ -1035,37 +1037,37 @@ State 46
 State 47
 
    54 fcall: lval • '(' args ')'
-   82 expr: lval •
-   83     | lval • '=' expr
-   99     | lval • tADDRESSOF
+   77 lval: lval • '[' expr ']'
+   83 expr: lval •
+   84     | lval • '=' expr
+  100     | lval • tADDRESSOF
 
     tADDRESSOF  shift, and go to state 95
-    '('         shift, and go to state 96
-    '='         shift, and go to state 97
+    '='         shift, and go to state 96
+    '('         shift, and go to state 97
+    '['         shift, and go to state 98
 
-    $default  reduce using rule 82 (expr)
+    $default  reduce using rule 83 (expr)
 
 
 State 48
 
    13 instruction: expr • ';'
    74 args: expr •
-   77 lval: expr • '[' expr ']'
-   84 expr: expr • '+' expr
-   85     | expr • '-' expr
-   86     | expr • '*' expr
-   87     | expr • '/' expr
-   88     | expr • '%' expr
-   89     | expr • '<' expr
-   90     | expr • '>' expr
-   91     | expr • tGE expr
-   92     | expr • tLE expr
-   93     | expr • tNE expr
-   94     | expr • tEQ expr
-   95     | expr • tAND expr
-   96     | expr • tOR expr
+   85 expr: expr • '+' expr
+   86     | expr • '-' expr
+   87     | expr • '*' expr
+   88     | expr • '/' expr
+   89     | expr • '%' expr
+   90     | expr • '<' expr
+   91     | expr • '>' expr
+   92     | expr • tGE expr
+   93     | expr • tLE expr
+   94     | expr • tNE expr
+   95     | expr • tEQ expr
+   96     | expr • tAND expr
+   97     | expr • tOR expr
 
-    '['   shift, and go to state 98
     tOR   shift, and go to state 99
     tAND  shift, and go to state 100
     '<'   shift, and go to state 101
@@ -1086,26 +1088,26 @@ State 48
 
 State 49
 
-   78 expr: integer •
-
-    $default  reduce using rule 78 (expr)
-
-
-State 50
-
-   79 expr: real •
+   79 expr: integer •
 
     $default  reduce using rule 79 (expr)
 
 
+State 50
+
+   80 expr: real •
+
+    $default  reduce using rule 80 (expr)
+
+
 State 51
 
-   80 expr: string •
-  110 string: string • tSTRING
+   81 expr: string •
+  111 string: string • tSTRING
 
     tSTRING  shift, and go to state 113
 
-    $default  reduce using rule 80 (expr)
+    $default  reduce using rule 81 (expr)
 
 
 State 52
@@ -1242,11 +1244,11 @@ State 66
     tREAD        shift, and go to state 25
     tRECURSION   shift, and go to state 29
     tSIZEOF      shift, and go to state 30
-    tNOT         shift, and go to state 31
-    '('          shift, and go to state 32
+    '+'          shift, and go to state 31
+    '-'          shift, and go to state 32
+    '('          shift, and go to state 33
     '['          shift, and go to state 70
-    '+'          shift, and go to state 34
-    '-'          shift, and go to state 35
+    '~'          shift, and go to state 36
 
     fdef     go to state 40
     fcall    go to state 41
@@ -1270,11 +1272,11 @@ State 67
     tREAD        shift, and go to state 25
     tRECURSION   shift, and go to state 29
     tSIZEOF      shift, and go to state 30
-    tNOT         shift, and go to state 31
-    '('          shift, and go to state 32
+    '+'          shift, and go to state 31
+    '-'          shift, and go to state 32
+    '('          shift, and go to state 33
     '['          shift, and go to state 70
-    '+'          shift, and go to state 34
-    '-'          shift, and go to state 35
+    '~'          shift, and go to state 36
 
     fdef     go to state 40
     fcall    go to state 41
@@ -1301,7 +1303,7 @@ State 69
 
 State 70
 
-  106 expr: '[' • expr ']'
+  107 expr: '[' • expr ']'
 
     tINTEGER     shift, and go to state 17
     tREAL        shift, and go to state 18
@@ -1311,16 +1313,16 @@ State 70
     tREAD        shift, and go to state 25
     tRECURSION   shift, and go to state 29
     tSIZEOF      shift, and go to state 30
-    tNOT         shift, and go to state 31
-    '('          shift, and go to state 32
+    '+'          shift, and go to state 31
+    '-'          shift, and go to state 32
+    '('          shift, and go to state 33
     '['          shift, and go to state 70
-    '+'          shift, and go to state 34
-    '-'          shift, and go to state 35
+    '~'          shift, and go to state 36
 
     fdef     go to state 40
     fcall    go to state 41
     lval     go to state 47
-    expr     go to state 79
+    expr     go to state 80
     integer  go to state 49
     real     go to state 50
     string   go to state 51
@@ -1329,22 +1331,20 @@ State 70
 State 71
 
    68 return: tRETURN expr •
-   77 lval: expr • '[' expr ']'
-   84 expr: expr • '+' expr
-   85     | expr • '-' expr
-   86     | expr • '*' expr
-   87     | expr • '/' expr
-   88     | expr • '%' expr
-   89     | expr • '<' expr
-   90     | expr • '>' expr
-   91     | expr • tGE expr
-   92     | expr • tLE expr
-   93     | expr • tNE expr
-   94     | expr • tEQ expr
-   95     | expr • tAND expr
-   96     | expr • tOR expr
+   85 expr: expr • '+' expr
+   86     | expr • '-' expr
+   87     | expr • '*' expr
+   88     | expr • '/' expr
+   89     | expr • '%' expr
+   90     | expr • '<' expr
+   91     | expr • '>' expr
+   92     | expr • tGE expr
+   93     | expr • tLE expr
+   94     | expr • tNE expr
+   95     | expr • tEQ expr
+   96     | expr • tAND expr
+   97     | expr • tOR expr
 
-    '['   shift, and go to state 98
     tOR   shift, and go to state 99
     tAND  shift, and go to state 100
     '<'   shift, and go to state 101
@@ -1374,11 +1374,11 @@ State 72
     tREAD        shift, and go to state 25
     tRECURSION   shift, and go to state 29
     tSIZEOF      shift, and go to state 30
-    tNOT         shift, and go to state 31
-    '('          shift, and go to state 32
+    '+'          shift, and go to state 31
+    '-'          shift, and go to state 32
+    '('          shift, and go to state 33
     '['          shift, and go to state 70
-    '+'          shift, and go to state 34
-    '-'          shift, and go to state 35
+    '~'          shift, and go to state 36
 
     $default  reduce using rule 73 (args)
 
@@ -1394,7 +1394,7 @@ State 72
 
 State 73
 
-  104 expr: tSIZEOF '(' • expr ')'
+  105 expr: tSIZEOF '(' • expr ')'
 
     tINTEGER     shift, and go to state 17
     tREAL        shift, and go to state 18
@@ -1404,11 +1404,11 @@ State 73
     tREAD        shift, and go to state 25
     tRECURSION   shift, and go to state 29
     tSIZEOF      shift, and go to state 30
-    tNOT         shift, and go to state 31
-    '('          shift, and go to state 32
+    '+'          shift, and go to state 31
+    '-'          shift, and go to state 32
+    '('          shift, and go to state 33
     '['          shift, and go to state 70
-    '+'          shift, and go to state 34
-    '-'          shift, and go to state 35
+    '~'          shift, and go to state 36
 
     fdef     go to state 40
     fcall    go to state 41
@@ -1421,23 +1421,21 @@ State 73
 
 State 74
 
-   77 lval: expr • '[' expr ']'
-   84 expr: expr • '+' expr
-   85     | expr • '-' expr
-   86     | expr • '*' expr
-   87     | expr • '/' expr
-   88     | expr • '%' expr
-   89     | expr • '<' expr
-   90     | expr • '>' expr
-   91     | expr • tGE expr
-   92     | expr • tLE expr
-   93     | expr • tNE expr
-   94     | expr • tEQ expr
-   95     | expr • tAND expr
-   96     | expr • tOR expr
-  100     | tNOT expr •
+   85 expr: expr • '+' expr
+   86     | expr • '-' expr
+   87     | expr • '*' expr
+   88     | expr • '/' expr
+   89     | expr • '%' expr
+   90     | expr • '<' expr
+   91     | expr • '>' expr
+   92     | expr • tGE expr
+   93     | expr • tLE expr
+   94     | expr • tNE expr
+   95     | expr • tEQ expr
+   96     | expr • tAND expr
+   97     | expr • tOR expr
+   99     | '+' expr •
 
-    '['   shift, and go to state 98
     tOR   shift, and go to state 99
     tAND  shift, and go to state 100
     '<'   shift, and go to state 101
@@ -1452,124 +1450,26 @@ State 74
     '/'   shift, and go to state 110
     '%'   shift, and go to state 111
 
-    $default  reduce using rule 100 (expr)
+    $default  reduce using rule 99 (expr)
 
 
 State 75
 
-   52 func_type: data_type • '<' opt_type_seq '>'
-   72 argdec: data_type • tIDENTIFIER
+   85 expr: expr • '+' expr
+   86     | expr • '-' expr
+   87     | expr • '*' expr
+   88     | expr • '/' expr
+   89     | expr • '%' expr
+   90     | expr • '<' expr
+   91     | expr • '>' expr
+   92     | expr • tGE expr
+   93     | expr • tLE expr
+   94     | expr • tNE expr
+   95     | expr • tEQ expr
+   96     | expr • tAND expr
+   97     | expr • tOR expr
+   98     | '-' expr •
 
-    tIDENTIFIER  shift, and go to state 132
-    '<'          shift, and go to state 65
-
-
-State 76
-
-   53 fdef: '(' argdecs • ')' tARROW data_type block
-   71 argdecs: argdecs • ',' argdec
-
-    ')'  shift, and go to state 133
-    ','  shift, and go to state 134
-
-
-State 77
-
-   70 argdecs: argdec •
-
-    $default  reduce using rule 70 (argdecs)
-
-
-State 78
-
-   55 fcall: '(' expr • ')' '(' args ')'
-   77 lval: expr • '[' expr ']'
-   84 expr: expr • '+' expr
-   85     | expr • '-' expr
-   86     | expr • '*' expr
-   87     | expr • '/' expr
-   88     | expr • '%' expr
-   89     | expr • '<' expr
-   90     | expr • '>' expr
-   91     | expr • tGE expr
-   92     | expr • tLE expr
-   93     | expr • tNE expr
-   94     | expr • tEQ expr
-   95     | expr • tAND expr
-   96     | expr • tOR expr
-  105     | '(' expr • ')'
-
-    '['   shift, and go to state 98
-    tOR   shift, and go to state 99
-    tAND  shift, and go to state 100
-    '<'   shift, and go to state 101
-    '>'   shift, and go to state 102
-    tGE   shift, and go to state 103
-    tLE   shift, and go to state 104
-    tEQ   shift, and go to state 105
-    tNE   shift, and go to state 106
-    '+'   shift, and go to state 107
-    '-'   shift, and go to state 108
-    '*'   shift, and go to state 109
-    '/'   shift, and go to state 110
-    '%'   shift, and go to state 111
-    ')'   shift, and go to state 135
-
-
-State 79
-
-   77 lval: expr • '[' expr ']'
-   84 expr: expr • '+' expr
-   85     | expr • '-' expr
-   86     | expr • '*' expr
-   87     | expr • '/' expr
-   88     | expr • '%' expr
-   89     | expr • '<' expr
-   90     | expr • '>' expr
-   91     | expr • tGE expr
-   92     | expr • tLE expr
-   93     | expr • tNE expr
-   94     | expr • tEQ expr
-   95     | expr • tAND expr
-   96     | expr • tOR expr
-  106     | '[' expr • ']'
-
-    '['   shift, and go to state 98
-    tOR   shift, and go to state 99
-    tAND  shift, and go to state 100
-    '<'   shift, and go to state 101
-    '>'   shift, and go to state 102
-    tGE   shift, and go to state 103
-    tLE   shift, and go to state 104
-    tEQ   shift, and go to state 105
-    tNE   shift, and go to state 106
-    '+'   shift, and go to state 107
-    '-'   shift, and go to state 108
-    '*'   shift, and go to state 109
-    '/'   shift, and go to state 110
-    '%'   shift, and go to state 111
-    ']'   shift, and go to state 136
-
-
-State 80
-
-   77 lval: expr • '[' expr ']'
-   84 expr: expr • '+' expr
-   85     | expr • '-' expr
-   86     | expr • '*' expr
-   87     | expr • '/' expr
-   88     | expr • '%' expr
-   89     | expr • '<' expr
-   90     | expr • '>' expr
-   91     | expr • tGE expr
-   92     | expr • tLE expr
-   93     | expr • tNE expr
-   94     | expr • tEQ expr
-   95     | expr • tAND expr
-   96     | expr • tOR expr
-   98     | '+' expr •
-
-    '['   shift, and go to state 98
     tOR   shift, and go to state 99
     tAND  shift, and go to state 100
     '<'   shift, and go to state 101
@@ -1587,25 +1487,50 @@ State 80
     $default  reduce using rule 98 (expr)
 
 
-State 81
+State 76
 
-   77 lval: expr • '[' expr ']'
-   84 expr: expr • '+' expr
-   85     | expr • '-' expr
-   86     | expr • '*' expr
-   87     | expr • '/' expr
-   88     | expr • '%' expr
-   89     | expr • '<' expr
-   90     | expr • '>' expr
-   91     | expr • tGE expr
-   92     | expr • tLE expr
-   93     | expr • tNE expr
-   94     | expr • tEQ expr
-   95     | expr • tAND expr
-   96     | expr • tOR expr
-   97     | '-' expr •
+   52 func_type: data_type • '<' opt_type_seq '>'
+   72 argdec: data_type • tIDENTIFIER
 
-    '['   shift, and go to state 98
+    tIDENTIFIER  shift, and go to state 132
+    '<'          shift, and go to state 65
+
+
+State 77
+
+   53 fdef: '(' argdecs • ')' tARROW data_type block
+   71 argdecs: argdecs • ',' argdec
+
+    ')'  shift, and go to state 133
+    ','  shift, and go to state 134
+
+
+State 78
+
+   70 argdecs: argdec •
+
+    $default  reduce using rule 70 (argdecs)
+
+
+State 79
+
+   55 fcall: '(' expr • ')' '(' args ')'
+   78 lval: '(' expr • ')' '[' expr ']'
+   85 expr: expr • '+' expr
+   86     | expr • '-' expr
+   87     | expr • '*' expr
+   88     | expr • '/' expr
+   89     | expr • '%' expr
+   90     | expr • '<' expr
+   91     | expr • '>' expr
+   92     | expr • tGE expr
+   93     | expr • tLE expr
+   94     | expr • tNE expr
+   95     | expr • tEQ expr
+   96     | expr • tAND expr
+   97     | expr • tOR expr
+  106     | '(' expr • ')'
+
     tOR   shift, and go to state 99
     tAND  shift, and go to state 100
     '<'   shift, and go to state 101
@@ -1619,18 +1544,50 @@ State 81
     '*'   shift, and go to state 109
     '/'   shift, and go to state 110
     '%'   shift, and go to state 111
+    ')'   shift, and go to state 135
 
-    $default  reduce using rule 97 (expr)
+
+State 80
+
+   85 expr: expr • '+' expr
+   86     | expr • '-' expr
+   87     | expr • '*' expr
+   88     | expr • '/' expr
+   89     | expr • '%' expr
+   90     | expr • '<' expr
+   91     | expr • '>' expr
+   92     | expr • tGE expr
+   93     | expr • tLE expr
+   94     | expr • tNE expr
+   95     | expr • tEQ expr
+   96     | expr • tAND expr
+   97     | expr • tOR expr
+  107     | '[' expr • ']'
+
+    tOR   shift, and go to state 99
+    tAND  shift, and go to state 100
+    '<'   shift, and go to state 101
+    '>'   shift, and go to state 102
+    tGE   shift, and go to state 103
+    tLE   shift, and go to state 104
+    tEQ   shift, and go to state 105
+    tNE   shift, and go to state 106
+    '+'   shift, and go to state 107
+    '-'   shift, and go to state 108
+    '*'   shift, and go to state 109
+    '/'   shift, and go to state 110
+    '%'   shift, and go to state 111
+    ']'   shift, and go to state 136
 
 
-State 82
+State 81
 
    59 block: '{' '}' •
 
     $default  reduce using rule 59 (block)
 
 
-State 83
+State 82
 
    10 vardecs: vardecs • vardec ';'
    60 block: '{' vardecs • '}'
@@ -1657,13 +1614,13 @@ State 83
     tRETURN       shift, and go to state 28
     tRECURSION    shift, and go to state 29
     tSIZEOF       shift, and go to state 30
-    tNOT          shift, and go to state 31
-    '('           shift, and go to state 32
-    '['           shift, and go to state 33
-    '+'           shift, and go to state 34
-    '-'           shift, and go to state 35
-    '{'           shift, and go to state 36
+    '+'           shift, and go to state 31
+    '-'           shift, and go to state 32
+    '('           shift, and go to state 33
+    '['           shift, and go to state 34
+    '{'           shift, and go to state 35
     '}'           shift, and go to state 137
+    '~'           shift, and go to state 36
 
     $default  reduce using rule 73 (args)
 
@@ -1686,7 +1643,7 @@ State 83
     string        go to state 51
 
 
-State 84
+State 83
 
    12 instructions: instructions • instruction
    61 block: '{' instructions • '}'
@@ -1704,13 +1661,13 @@ State 84
     tRETURN      shift, and go to state 28
     tRECURSION   shift, and go to state 29
     tSIZEOF      shift, and go to state 30
-    tNOT         shift, and go to state 31
-    '('          shift, and go to state 32
+    '+'          shift, and go to state 31
+    '-'          shift, and go to state 32
+    '('          shift, and go to state 33
     '['          shift, and go to state 70
-    '+'          shift, and go to state 34
-    '-'          shift, and go to state 35
-    '{'          shift, and go to state 36
+    '{'          shift, and go to state 35
     '}'          shift, and go to state 139
+    '~'          shift, and go to state 36
 
     $default  reduce using rule 73 (args)
 
@@ -1727,6 +1684,40 @@ State 84
     integer      go to state 49
     real         go to state 50
     string       go to state 51
+
+
+State 84
+
+   85 expr: expr • '+' expr
+   86     | expr • '-' expr
+   87     | expr • '*' expr
+   88     | expr • '/' expr
+   89     | expr • '%' expr
+   90     | expr • '<' expr
+   91     | expr • '>' expr
+   92     | expr • tGE expr
+   93     | expr • tLE expr
+   94     | expr • tNE expr
+   95     | expr • tEQ expr
+   96     | expr • tAND expr
+   97     | expr • tOR expr
+  101     | '~' expr •
+
+    tOR   shift, and go to state 99
+    tAND  shift, and go to state 100
+    '<'   shift, and go to state 101
+    '>'   shift, and go to state 102
+    tGE   shift, and go to state 103
+    tLE   shift, and go to state 104
+    tEQ   shift, and go to state 105
+    tNE   shift, and go to state 106
+    '+'   shift, and go to state 107
+    '-'   shift, and go to state 108
+    '*'   shift, and go to state 109
+    '/'   shift, and go to state 110
+    '%'   shift, and go to state 111
+
+    $default  reduce using rule 101 (expr)
 
 
 State 85
@@ -1755,12 +1746,12 @@ State 86
     tRETURN      shift, and go to state 28
     tRECURSION   shift, and go to state 29
     tSIZEOF      shift, and go to state 30
-    tNOT         shift, and go to state 31
-    '('          shift, and go to state 32
+    '+'          shift, and go to state 31
+    '-'          shift, and go to state 32
+    '('          shift, and go to state 33
     '['          shift, and go to state 70
-    '+'          shift, and go to state 34
-    '-'          shift, and go to state 35
-    '{'          shift, and go to state 36
+    '{'          shift, and go to state 35
+    '~'          shift, and go to state 36
 
     $default  reduce using rule 73 (args)
 
@@ -1840,11 +1831,11 @@ State 94
     tREAD        shift, and go to state 25
     tRECURSION   shift, and go to state 29
     tSIZEOF      shift, and go to state 30
-    tNOT         shift, and go to state 31
-    '('          shift, and go to state 32
+    '+'          shift, and go to state 31
+    '-'          shift, and go to state 32
+    '('          shift, and go to state 33
     '['          shift, and go to state 70
-    '+'          shift, and go to state 34
-    '-'          shift, and go to state 35
+    '~'          shift, and go to state 36
 
     fdef     go to state 40
     fcall    go to state 41
@@ -1857,12 +1848,39 @@ State 94
 
 State 95
 
-   99 expr: lval tADDRESSOF •
+  100 expr: lval tADDRESSOF •
 
-    $default  reduce using rule 99 (expr)
+    $default  reduce using rule 100 (expr)
 
 
 State 96
+
+   84 expr: lval '=' • expr
+
+    tINTEGER     shift, and go to state 17
+    tREAL        shift, and go to state 18
+    tIDENTIFIER  shift, and go to state 19
+    tSTRING      shift, and go to state 20
+    tNULLPTR     shift, and go to state 21
+    tREAD        shift, and go to state 25
+    tRECURSION   shift, and go to state 29
+    tSIZEOF      shift, and go to state 30
+    '+'          shift, and go to state 31
+    '-'          shift, and go to state 32
+    '('          shift, and go to state 33
+    '['          shift, and go to state 70
+    '~'          shift, and go to state 36
+
+    fdef     go to state 40
+    fcall    go to state 41
+    lval     go to state 47
+    expr     go to state 142
+    integer  go to state 49
+    real     go to state 50
+    string   go to state 51
+
+
+State 97
 
    54 fcall: lval '(' • args ')'
 
@@ -1874,17 +1892,17 @@ State 96
     tREAD        shift, and go to state 25
     tRECURSION   shift, and go to state 29
     tSIZEOF      shift, and go to state 30
-    tNOT         shift, and go to state 31
-    '('          shift, and go to state 32
+    '+'          shift, and go to state 31
+    '-'          shift, and go to state 32
+    '('          shift, and go to state 33
     '['          shift, and go to state 70
-    '+'          shift, and go to state 34
-    '-'          shift, and go to state 35
+    '~'          shift, and go to state 36
 
     $default  reduce using rule 73 (args)
 
     fdef     go to state 40
     fcall    go to state 41
-    args     go to state 142
+    args     go to state 143
     lval     go to state 47
     expr     go to state 130
     integer  go to state 49
@@ -1892,36 +1910,9 @@ State 96
     string   go to state 51
 
 
-State 97
-
-   83 expr: lval '=' • expr
-
-    tINTEGER     shift, and go to state 17
-    tREAL        shift, and go to state 18
-    tIDENTIFIER  shift, and go to state 19
-    tSTRING      shift, and go to state 20
-    tNULLPTR     shift, and go to state 21
-    tREAD        shift, and go to state 25
-    tRECURSION   shift, and go to state 29
-    tSIZEOF      shift, and go to state 30
-    tNOT         shift, and go to state 31
-    '('          shift, and go to state 32
-    '['          shift, and go to state 70
-    '+'          shift, and go to state 34
-    '-'          shift, and go to state 35
-
-    fdef     go to state 40
-    fcall    go to state 41
-    lval     go to state 47
-    expr     go to state 143
-    integer  go to state 49
-    real     go to state 50
-    string   go to state 51
-
-
 State 98
 
-   77 lval: expr '[' • expr ']'
+   77 lval: lval '[' • expr ']'
 
     tINTEGER     shift, and go to state 17
     tREAL        shift, and go to state 18
@@ -1931,11 +1922,11 @@ State 98
     tREAD        shift, and go to state 25
     tRECURSION   shift, and go to state 29
     tSIZEOF      shift, and go to state 30
-    tNOT         shift, and go to state 31
-    '('          shift, and go to state 32
+    '+'          shift, and go to state 31
+    '-'          shift, and go to state 32
+    '('          shift, and go to state 33
     '['          shift, and go to state 70
-    '+'          shift, and go to state 34
-    '-'          shift, and go to state 35
+    '~'          shift, and go to state 36
 
     fdef     go to state 40
     fcall    go to state 41
@@ -1948,7 +1939,7 @@ State 98
 
 State 99
 
-   96 expr: expr tOR • expr
+   97 expr: expr tOR • expr
 
     tINTEGER     shift, and go to state 17
     tREAL        shift, and go to state 18
@@ -1958,11 +1949,11 @@ State 99
     tREAD        shift, and go to state 25
     tRECURSION   shift, and go to state 29
     tSIZEOF      shift, and go to state 30
-    tNOT         shift, and go to state 31
-    '('          shift, and go to state 32
+    '+'          shift, and go to state 31
+    '-'          shift, and go to state 32
+    '('          shift, and go to state 33
     '['          shift, and go to state 70
-    '+'          shift, and go to state 34
-    '-'          shift, and go to state 35
+    '~'          shift, and go to state 36
 
     fdef     go to state 40
     fcall    go to state 41
@@ -1975,7 +1966,7 @@ State 99
 
 State 100
 
-   95 expr: expr tAND • expr
+   96 expr: expr tAND • expr
 
     tINTEGER     shift, and go to state 17
     tREAL        shift, and go to state 18
@@ -1985,11 +1976,11 @@ State 100
     tREAD        shift, and go to state 25
     tRECURSION   shift, and go to state 29
     tSIZEOF      shift, and go to state 30
-    tNOT         shift, and go to state 31
-    '('          shift, and go to state 32
+    '+'          shift, and go to state 31
+    '-'          shift, and go to state 32
+    '('          shift, and go to state 33
     '['          shift, and go to state 70
-    '+'          shift, and go to state 34
-    '-'          shift, and go to state 35
+    '~'          shift, and go to state 36
 
     fdef     go to state 40
     fcall    go to state 41
@@ -2002,7 +1993,7 @@ State 100
 
 State 101
 
-   89 expr: expr '<' • expr
+   90 expr: expr '<' • expr
 
     tINTEGER     shift, and go to state 17
     tREAL        shift, and go to state 18
@@ -2012,11 +2003,11 @@ State 101
     tREAD        shift, and go to state 25
     tRECURSION   shift, and go to state 29
     tSIZEOF      shift, and go to state 30
-    tNOT         shift, and go to state 31
-    '('          shift, and go to state 32
+    '+'          shift, and go to state 31
+    '-'          shift, and go to state 32
+    '('          shift, and go to state 33
     '['          shift, and go to state 70
-    '+'          shift, and go to state 34
-    '-'          shift, and go to state 35
+    '~'          shift, and go to state 36
 
     fdef     go to state 40
     fcall    go to state 41
@@ -2029,7 +2020,7 @@ State 101
 
 State 102
 
-   90 expr: expr '>' • expr
+   91 expr: expr '>' • expr
 
     tINTEGER     shift, and go to state 17
     tREAL        shift, and go to state 18
@@ -2039,11 +2030,11 @@ State 102
     tREAD        shift, and go to state 25
     tRECURSION   shift, and go to state 29
     tSIZEOF      shift, and go to state 30
-    tNOT         shift, and go to state 31
-    '('          shift, and go to state 32
+    '+'          shift, and go to state 31
+    '-'          shift, and go to state 32
+    '('          shift, and go to state 33
     '['          shift, and go to state 70
-    '+'          shift, and go to state 34
-    '-'          shift, and go to state 35
+    '~'          shift, and go to state 36
 
     fdef     go to state 40
     fcall    go to state 41
@@ -2056,7 +2047,7 @@ State 102
 
 State 103
 
-   91 expr: expr tGE • expr
+   92 expr: expr tGE • expr
 
     tINTEGER     shift, and go to state 17
     tREAL        shift, and go to state 18
@@ -2066,11 +2057,11 @@ State 103
     tREAD        shift, and go to state 25
     tRECURSION   shift, and go to state 29
     tSIZEOF      shift, and go to state 30
-    tNOT         shift, and go to state 31
-    '('          shift, and go to state 32
+    '+'          shift, and go to state 31
+    '-'          shift, and go to state 32
+    '('          shift, and go to state 33
     '['          shift, and go to state 70
-    '+'          shift, and go to state 34
-    '-'          shift, and go to state 35
+    '~'          shift, and go to state 36
 
     fdef     go to state 40
     fcall    go to state 41
@@ -2083,7 +2074,7 @@ State 103
 
 State 104
 
-   92 expr: expr tLE • expr
+   93 expr: expr tLE • expr
 
     tINTEGER     shift, and go to state 17
     tREAL        shift, and go to state 18
@@ -2093,11 +2084,11 @@ State 104
     tREAD        shift, and go to state 25
     tRECURSION   shift, and go to state 29
     tSIZEOF      shift, and go to state 30
-    tNOT         shift, and go to state 31
-    '('          shift, and go to state 32
+    '+'          shift, and go to state 31
+    '-'          shift, and go to state 32
+    '('          shift, and go to state 33
     '['          shift, and go to state 70
-    '+'          shift, and go to state 34
-    '-'          shift, and go to state 35
+    '~'          shift, and go to state 36
 
     fdef     go to state 40
     fcall    go to state 41
@@ -2110,7 +2101,7 @@ State 104
 
 State 105
 
-   94 expr: expr tEQ • expr
+   95 expr: expr tEQ • expr
 
     tINTEGER     shift, and go to state 17
     tREAL        shift, and go to state 18
@@ -2120,11 +2111,11 @@ State 105
     tREAD        shift, and go to state 25
     tRECURSION   shift, and go to state 29
     tSIZEOF      shift, and go to state 30
-    tNOT         shift, and go to state 31
-    '('          shift, and go to state 32
+    '+'          shift, and go to state 31
+    '-'          shift, and go to state 32
+    '('          shift, and go to state 33
     '['          shift, and go to state 70
-    '+'          shift, and go to state 34
-    '-'          shift, and go to state 35
+    '~'          shift, and go to state 36
 
     fdef     go to state 40
     fcall    go to state 41
@@ -2137,7 +2128,7 @@ State 105
 
 State 106
 
-   93 expr: expr tNE • expr
+   94 expr: expr tNE • expr
 
     tINTEGER     shift, and go to state 17
     tREAL        shift, and go to state 18
@@ -2147,11 +2138,11 @@ State 106
     tREAD        shift, and go to state 25
     tRECURSION   shift, and go to state 29
     tSIZEOF      shift, and go to state 30
-    tNOT         shift, and go to state 31
-    '('          shift, and go to state 32
+    '+'          shift, and go to state 31
+    '-'          shift, and go to state 32
+    '('          shift, and go to state 33
     '['          shift, and go to state 70
-    '+'          shift, and go to state 34
-    '-'          shift, and go to state 35
+    '~'          shift, and go to state 36
 
     fdef     go to state 40
     fcall    go to state 41
@@ -2164,7 +2155,7 @@ State 106
 
 State 107
 
-   84 expr: expr '+' • expr
+   85 expr: expr '+' • expr
 
     tINTEGER     shift, and go to state 17
     tREAL        shift, and go to state 18
@@ -2174,11 +2165,11 @@ State 107
     tREAD        shift, and go to state 25
     tRECURSION   shift, and go to state 29
     tSIZEOF      shift, and go to state 30
-    tNOT         shift, and go to state 31
-    '('          shift, and go to state 32
+    '+'          shift, and go to state 31
+    '-'          shift, and go to state 32
+    '('          shift, and go to state 33
     '['          shift, and go to state 70
-    '+'          shift, and go to state 34
-    '-'          shift, and go to state 35
+    '~'          shift, and go to state 36
 
     fdef     go to state 40
     fcall    go to state 41
@@ -2191,7 +2182,7 @@ State 107
 
 State 108
 
-   85 expr: expr '-' • expr
+   86 expr: expr '-' • expr
 
     tINTEGER     shift, and go to state 17
     tREAL        shift, and go to state 18
@@ -2201,11 +2192,11 @@ State 108
     tREAD        shift, and go to state 25
     tRECURSION   shift, and go to state 29
     tSIZEOF      shift, and go to state 30
-    tNOT         shift, and go to state 31
-    '('          shift, and go to state 32
+    '+'          shift, and go to state 31
+    '-'          shift, and go to state 32
+    '('          shift, and go to state 33
     '['          shift, and go to state 70
-    '+'          shift, and go to state 34
-    '-'          shift, and go to state 35
+    '~'          shift, and go to state 36
 
     fdef     go to state 40
     fcall    go to state 41
@@ -2218,7 +2209,7 @@ State 108
 
 State 109
 
-   86 expr: expr '*' • expr
+   87 expr: expr '*' • expr
 
     tINTEGER     shift, and go to state 17
     tREAL        shift, and go to state 18
@@ -2228,11 +2219,11 @@ State 109
     tREAD        shift, and go to state 25
     tRECURSION   shift, and go to state 29
     tSIZEOF      shift, and go to state 30
-    tNOT         shift, and go to state 31
-    '('          shift, and go to state 32
+    '+'          shift, and go to state 31
+    '-'          shift, and go to state 32
+    '('          shift, and go to state 33
     '['          shift, and go to state 70
-    '+'          shift, and go to state 34
-    '-'          shift, and go to state 35
+    '~'          shift, and go to state 36
 
     fdef     go to state 40
     fcall    go to state 41
@@ -2245,7 +2236,7 @@ State 109
 
 State 110
 
-   87 expr: expr '/' • expr
+   88 expr: expr '/' • expr
 
     tINTEGER     shift, and go to state 17
     tREAL        shift, and go to state 18
@@ -2255,11 +2246,11 @@ State 110
     tREAD        shift, and go to state 25
     tRECURSION   shift, and go to state 29
     tSIZEOF      shift, and go to state 30
-    tNOT         shift, and go to state 31
-    '('          shift, and go to state 32
+    '+'          shift, and go to state 31
+    '-'          shift, and go to state 32
+    '('          shift, and go to state 33
     '['          shift, and go to state 70
-    '+'          shift, and go to state 34
-    '-'          shift, and go to state 35
+    '~'          shift, and go to state 36
 
     fdef     go to state 40
     fcall    go to state 41
@@ -2272,7 +2263,7 @@ State 110
 
 State 111
 
-   88 expr: expr '%' • expr
+   89 expr: expr '%' • expr
 
     tINTEGER     shift, and go to state 17
     tREAL        shift, and go to state 18
@@ -2282,11 +2273,11 @@ State 111
     tREAD        shift, and go to state 25
     tRECURSION   shift, and go to state 29
     tSIZEOF      shift, and go to state 30
-    tNOT         shift, and go to state 31
-    '('          shift, and go to state 32
+    '+'          shift, and go to state 31
+    '-'          shift, and go to state 32
+    '('          shift, and go to state 33
     '['          shift, and go to state 70
-    '+'          shift, and go to state 34
-    '-'          shift, and go to state 35
+    '~'          shift, and go to state 36
 
     fdef     go to state 40
     fcall    go to state 41
@@ -2306,9 +2297,9 @@ State 112
 
 State 113
 
-  110 string: string tSTRING •
+  111 string: string tSTRING •
 
-    $default  reduce using rule 110 (string)
+    $default  reduce using rule 111 (string)
 
 
 State 114
@@ -2323,11 +2314,11 @@ State 114
     tREAD        shift, and go to state 25
     tRECURSION   shift, and go to state 29
     tSIZEOF      shift, and go to state 30
-    tNOT         shift, and go to state 31
-    '('          shift, and go to state 32
+    '+'          shift, and go to state 31
+    '-'          shift, and go to state 32
+    '('          shift, and go to state 33
     '['          shift, and go to state 70
-    '+'          shift, and go to state 34
-    '-'          shift, and go to state 35
+    '~'          shift, and go to state 36
 
     fdef     go to state 40
     fcall    go to state 41
@@ -2350,11 +2341,11 @@ State 115
     tREAD        shift, and go to state 25
     tRECURSION   shift, and go to state 29
     tSIZEOF      shift, and go to state 30
-    tNOT         shift, and go to state 31
-    '('          shift, and go to state 32
+    '+'          shift, and go to state 31
+    '-'          shift, and go to state 32
+    '('          shift, and go to state 33
     '['          shift, and go to state 70
-    '+'          shift, and go to state 34
-    '-'          shift, and go to state 35
+    '~'          shift, and go to state 36
 
     fdef     go to state 40
     fcall    go to state 41
@@ -2423,11 +2414,11 @@ State 122
     tREAD        shift, and go to state 25
     tRECURSION   shift, and go to state 29
     tSIZEOF      shift, and go to state 30
-    tNOT         shift, and go to state 31
-    '('          shift, and go to state 32
+    '+'          shift, and go to state 31
+    '-'          shift, and go to state 32
+    '('          shift, and go to state 33
     '['          shift, and go to state 70
-    '+'          shift, and go to state 34
-    '-'          shift, and go to state 35
+    '~'          shift, and go to state 36
 
     fdef     go to state 40
     fcall    go to state 41
@@ -2475,22 +2466,20 @@ State 126
 State 127
 
    16 instruction: tWHILE '(' expr • ')' inst
-   77 lval: expr • '[' expr ']'
-   84 expr: expr • '+' expr
-   85     | expr • '-' expr
-   86     | expr • '*' expr
-   87     | expr • '/' expr
-   88     | expr • '%' expr
-   89     | expr • '<' expr
-   90     | expr • '>' expr
-   91     | expr • tGE expr
-   92     | expr • tLE expr
-   93     | expr • tNE expr
-   94     | expr • tEQ expr
-   95     | expr • tAND expr
-   96     | expr • tOR expr
+   85 expr: expr • '+' expr
+   86     | expr • '-' expr
+   87     | expr • '*' expr
+   88     | expr • '/' expr
+   89     | expr • '%' expr
+   90     | expr • '<' expr
+   91     | expr • '>' expr
+   92     | expr • tGE expr
+   93     | expr • tLE expr
+   94     | expr • tNE expr
+   95     | expr • tEQ expr
+   96     | expr • tAND expr
+   97     | expr • tOR expr
 
-    '['   shift, and go to state 98
     tOR   shift, and go to state 99
     tAND  shift, and go to state 100
     '<'   shift, and go to state 101
@@ -2511,22 +2500,20 @@ State 128
 
    17 instruction: tIF '(' expr • ')' inst
    18            | tIF '(' expr • ')' inst iffalse
-   77 lval: expr • '[' expr ']'
-   84 expr: expr • '+' expr
-   85     | expr • '-' expr
-   86     | expr • '*' expr
-   87     | expr • '/' expr
-   88     | expr • '%' expr
-   89     | expr • '<' expr
-   90     | expr • '>' expr
-   91     | expr • tGE expr
-   92     | expr • tLE expr
-   93     | expr • tNE expr
-   94     | expr • tEQ expr
-   95     | expr • tAND expr
-   96     | expr • tOR expr
+   85 expr: expr • '+' expr
+   86     | expr • '-' expr
+   87     | expr • '*' expr
+   88     | expr • '/' expr
+   89     | expr • '%' expr
+   90     | expr • '<' expr
+   91     | expr • '>' expr
+   92     | expr • tGE expr
+   93     | expr • tLE expr
+   94     | expr • tNE expr
+   95     | expr • tEQ expr
+   96     | expr • tAND expr
+   97     | expr • tOR expr
 
-    '['   shift, and go to state 98
     tOR   shift, and go to state 99
     tAND  shift, and go to state 100
     '<'   shift, and go to state 101
@@ -2555,22 +2542,20 @@ State 129
 State 130
 
    74 args: expr •
-   77 lval: expr • '[' expr ']'
-   84 expr: expr • '+' expr
-   85     | expr • '-' expr
-   86     | expr • '*' expr
-   87     | expr • '/' expr
-   88     | expr • '%' expr
-   89     | expr • '<' expr
-   90     | expr • '>' expr
-   91     | expr • tGE expr
-   92     | expr • tLE expr
-   93     | expr • tNE expr
-   94     | expr • tEQ expr
-   95     | expr • tAND expr
-   96     | expr • tOR expr
+   85 expr: expr • '+' expr
+   86     | expr • '-' expr
+   87     | expr • '*' expr
+   88     | expr • '/' expr
+   89     | expr • '%' expr
+   90     | expr • '<' expr
+   91     | expr • '>' expr
+   92     | expr • tGE expr
+   93     | expr • tLE expr
+   94     | expr • tNE expr
+   95     | expr • tEQ expr
+   96     | expr • tAND expr
+   97     | expr • tOR expr
 
-    '['   shift, and go to state 98
     tOR   shift, and go to state 99
     tAND  shift, and go to state 100
     '<'   shift, and go to state 101
@@ -2590,23 +2575,21 @@ State 130
 
 State 131
 
-   77 lval: expr • '[' expr ']'
-   84 expr: expr • '+' expr
-   85     | expr • '-' expr
-   86     | expr • '*' expr
-   87     | expr • '/' expr
-   88     | expr • '%' expr
-   89     | expr • '<' expr
-   90     | expr • '>' expr
-   91     | expr • tGE expr
-   92     | expr • tLE expr
-   93     | expr • tNE expr
-   94     | expr • tEQ expr
-   95     | expr • tAND expr
-   96     | expr • tOR expr
-  104     | tSIZEOF '(' expr • ')'
+   85 expr: expr • '+' expr
+   86     | expr • '-' expr
+   87     | expr • '*' expr
+   88     | expr • '/' expr
+   89     | expr • '%' expr
+   90     | expr • '<' expr
+   91     | expr • '>' expr
+   92     | expr • tGE expr
+   93     | expr • tLE expr
+   94     | expr • tNE expr
+   95     | expr • tEQ expr
+   96     | expr • tAND expr
+   97     | expr • tOR expr
+  105     | tSIZEOF '(' expr • ')'
 
-    '['   shift, and go to state 98
     tOR   shift, and go to state 99
     tAND  shift, and go to state 100
     '<'   shift, and go to state 101
@@ -2647,7 +2630,7 @@ State 134
     tTYPE_VOID    shift, and go to state 5
     '['           shift, and go to state 10
 
-    data_type  go to state 75
+    data_type  go to state 76
     func_type  go to state 16
     argdec     go to state 170
 
@@ -2655,18 +2638,20 @@ State 134
 State 135
 
    55 fcall: '(' expr ')' • '(' args ')'
-  105 expr: '(' expr ')' •
+   78 lval: '(' expr ')' • '[' expr ']'
+  106 expr: '(' expr ')' •
 
     '('  shift, and go to state 171
+    '['  shift, and go to state 172
 
-    $default  reduce using rule 105 (expr)
+    $default  reduce using rule 106 (expr)
 
 
 State 136
 
-  106 expr: '[' expr ']' •
+  107 expr: '[' expr ']' •
 
-    $default  reduce using rule 106 (expr)
+    $default  reduce using rule 107 (expr)
 
 
 State 137
@@ -2694,13 +2679,13 @@ State 138
     tRETURN      shift, and go to state 28
     tRECURSION   shift, and go to state 29
     tSIZEOF      shift, and go to state 30
-    tNOT         shift, and go to state 31
-    '('          shift, and go to state 32
+    '+'          shift, and go to state 31
+    '-'          shift, and go to state 32
+    '('          shift, and go to state 33
     '['          shift, and go to state 70
-    '+'          shift, and go to state 34
-    '-'          shift, and go to state 35
-    '{'          shift, and go to state 36
-    '}'          shift, and go to state 172
+    '{'          shift, and go to state 35
+    '}'          shift, and go to state 173
+    '~'          shift, and go to state 36
 
     $default  reduce using rule 73 (args)
 
@@ -2736,22 +2721,20 @@ State 140
 State 141
 
    75 args: args ',' expr •
-   77 lval: expr • '[' expr ']'
-   84 expr: expr • '+' expr
-   85     | expr • '-' expr
-   86     | expr • '*' expr
-   87     | expr • '/' expr
-   88     | expr • '%' expr
-   89     | expr • '<' expr
-   90     | expr • '>' expr
-   91     | expr • tGE expr
-   92     | expr • tLE expr
-   93     | expr • tNE expr
-   94     | expr • tEQ expr
-   95     | expr • tAND expr
-   96     | expr • tOR expr
+   85 expr: expr • '+' expr
+   86     | expr • '-' expr
+   87     | expr • '*' expr
+   88     | expr • '/' expr
+   89     | expr • '%' expr
+   90     | expr • '<' expr
+   91     | expr • '>' expr
+   92     | expr • tGE expr
+   93     | expr • tLE expr
+   94     | expr • tNE expr
+   95     | expr • tEQ expr
+   96     | expr • tAND expr
+   97     | expr • tOR expr
 
-    '['   shift, and go to state 98
     tOR   shift, and go to state 99
     tAND  shift, and go to state 100
     '<'   shift, and go to state 101
@@ -2771,67 +2754,64 @@ State 141
 
 State 142
 
-   54 fcall: lval '(' args • ')'
-   75 args: args • ',' expr
+   84 expr: lval '=' expr •
+   85     | expr • '+' expr
+   86     | expr • '-' expr
+   87     | expr • '*' expr
+   88     | expr • '/' expr
+   89     | expr • '%' expr
+   90     | expr • '<' expr
+   91     | expr • '>' expr
+   92     | expr • tGE expr
+   93     | expr • tLE expr
+   94     | expr • tNE expr
+   95     | expr • tEQ expr
+   96     | expr • tAND expr
+   97     | expr • tOR expr
 
-    ')'  shift, and go to state 173
-    ','  shift, and go to state 94
+    tOR   shift, and go to state 99
+    tAND  shift, and go to state 100
+    '<'   shift, and go to state 101
+    '>'   shift, and go to state 102
+    tGE   shift, and go to state 103
+    tLE   shift, and go to state 104
+    tEQ   shift, and go to state 105
+    tNE   shift, and go to state 106
+    '+'   shift, and go to state 107
+    '-'   shift, and go to state 108
+    '*'   shift, and go to state 109
+    '/'   shift, and go to state 110
+    '%'   shift, and go to state 111
+
+    $default  reduce using rule 84 (expr)
 
 
 State 143
 
-   77 lval: expr • '[' expr ']'
-   83 expr: lval '=' expr •
-   84     | expr • '+' expr
-   85     | expr • '-' expr
-   86     | expr • '*' expr
-   87     | expr • '/' expr
-   88     | expr • '%' expr
-   89     | expr • '<' expr
-   90     | expr • '>' expr
-   91     | expr • tGE expr
-   92     | expr • tLE expr
-   93     | expr • tNE expr
-   94     | expr • tEQ expr
-   95     | expr • tAND expr
-   96     | expr • tOR expr
+   54 fcall: lval '(' args • ')'
+   75 args: args • ',' expr
 
-    tOR   shift, and go to state 99
-    tAND  shift, and go to state 100
-    '<'   shift, and go to state 101
-    '>'   shift, and go to state 102
-    tGE   shift, and go to state 103
-    tLE   shift, and go to state 104
-    tEQ   shift, and go to state 105
-    tNE   shift, and go to state 106
-    '+'   shift, and go to state 107
-    '-'   shift, and go to state 108
-    '*'   shift, and go to state 109
-    '/'   shift, and go to state 110
-    '%'   shift, and go to state 111
-
-    $default  reduce using rule 83 (expr)
+    ')'  shift, and go to state 174
+    ','  shift, and go to state 94
 
 
 State 144
 
-   77 lval: expr • '[' expr ']'
-   77     | expr '[' expr • ']'
-   84 expr: expr • '+' expr
-   85     | expr • '-' expr
-   86     | expr • '*' expr
-   87     | expr • '/' expr
-   88     | expr • '%' expr
-   89     | expr • '<' expr
-   90     | expr • '>' expr
-   91     | expr • tGE expr
-   92     | expr • tLE expr
-   93     | expr • tNE expr
-   94     | expr • tEQ expr
-   95     | expr • tAND expr
-   96     | expr • tOR expr
+   77 lval: lval '[' expr • ']'
+   85 expr: expr • '+' expr
+   86     | expr • '-' expr
+   87     | expr • '*' expr
+   88     | expr • '/' expr
+   89     | expr • '%' expr
+   90     | expr • '<' expr
+   91     | expr • '>' expr
+   92     | expr • tGE expr
+   93     | expr • tLE expr
+   94     | expr • tNE expr
+   95     | expr • tEQ expr
+   96     | expr • tAND expr
+   97     | expr • tOR expr
 
-    '['   shift, and go to state 98
     tOR   shift, and go to state 99
     tAND  shift, and go to state 100
     '<'   shift, and go to state 101
@@ -2845,26 +2825,25 @@ State 144
     '*'   shift, and go to state 109
     '/'   shift, and go to state 110
     '%'   shift, and go to state 111
-    ']'   shift, and go to state 174
+    ']'   shift, and go to state 175
 
 
 State 145
 
-   77 lval: expr • '[' expr ']'
-   84 expr: expr • '+' expr
-   85     | expr • '-' expr
-   86     | expr • '*' expr
-   87     | expr • '/' expr
-   88     | expr • '%' expr
-   89     | expr • '<' expr
-   90     | expr • '>' expr
-   91     | expr • tGE expr
-   92     | expr • tLE expr
-   93     | expr • tNE expr
-   94     | expr • tEQ expr
-   95     | expr • tAND expr
-   96     | expr • tOR expr
-   96     | expr tOR expr •
+   85 expr: expr • '+' expr
+   86     | expr • '-' expr
+   87     | expr • '*' expr
+   88     | expr • '/' expr
+   89     | expr • '%' expr
+   90     | expr • '<' expr
+   91     | expr • '>' expr
+   92     | expr • tGE expr
+   93     | expr • tLE expr
+   94     | expr • tNE expr
+   95     | expr • tEQ expr
+   96     | expr • tAND expr
+   97     | expr • tOR expr
+   97     | expr tOR expr •
 
     tAND  shift, and go to state 100
     '<'   shift, and go to state 101
@@ -2879,26 +2858,25 @@ State 145
     '/'   shift, and go to state 110
     '%'   shift, and go to state 111
 
-    $default  reduce using rule 96 (expr)
+    $default  reduce using rule 97 (expr)
 
 
 State 146
 
-   77 lval: expr • '[' expr ']'
-   84 expr: expr • '+' expr
-   85     | expr • '-' expr
-   86     | expr • '*' expr
-   87     | expr • '/' expr
-   88     | expr • '%' expr
-   89     | expr • '<' expr
-   90     | expr • '>' expr
-   91     | expr • tGE expr
-   92     | expr • tLE expr
-   93     | expr • tNE expr
-   94     | expr • tEQ expr
-   95     | expr • tAND expr
-   95     | expr tAND expr •
-   96     | expr • tOR expr
+   85 expr: expr • '+' expr
+   86     | expr • '-' expr
+   87     | expr • '*' expr
+   88     | expr • '/' expr
+   89     | expr • '%' expr
+   90     | expr • '<' expr
+   91     | expr • '>' expr
+   92     | expr • tGE expr
+   93     | expr • tLE expr
+   94     | expr • tNE expr
+   95     | expr • tEQ expr
+   96     | expr • tAND expr
+   96     | expr tAND expr •
+   97     | expr • tOR expr
 
     '<'  shift, and go to state 101
     '>'  shift, and go to state 102
@@ -2912,53 +2890,25 @@ State 146
     '/'  shift, and go to state 110
     '%'  shift, and go to state 111
 
-    $default  reduce using rule 95 (expr)
+    $default  reduce using rule 96 (expr)
 
 
 State 147
 
-   77 lval: expr • '[' expr ']'
-   84 expr: expr • '+' expr
-   85     | expr • '-' expr
-   86     | expr • '*' expr
-   87     | expr • '/' expr
-   88     | expr • '%' expr
-   89     | expr • '<' expr
-   89     | expr '<' expr •
-   90     | expr • '>' expr
-   91     | expr • tGE expr
-   92     | expr • tLE expr
-   93     | expr • tNE expr
-   94     | expr • tEQ expr
-   95     | expr • tAND expr
-   96     | expr • tOR expr
-
-    '+'  shift, and go to state 107
-    '-'  shift, and go to state 108
-    '*'  shift, and go to state 109
-    '/'  shift, and go to state 110
-    '%'  shift, and go to state 111
-
-    $default  reduce using rule 89 (expr)
-
-
-State 148
-
-   77 lval: expr • '[' expr ']'
-   84 expr: expr • '+' expr
-   85     | expr • '-' expr
-   86     | expr • '*' expr
-   87     | expr • '/' expr
-   88     | expr • '%' expr
-   89     | expr • '<' expr
-   90     | expr • '>' expr
-   90     | expr '>' expr •
-   91     | expr • tGE expr
-   92     | expr • tLE expr
-   93     | expr • tNE expr
-   94     | expr • tEQ expr
-   95     | expr • tAND expr
-   96     | expr • tOR expr
+   85 expr: expr • '+' expr
+   86     | expr • '-' expr
+   87     | expr • '*' expr
+   88     | expr • '/' expr
+   89     | expr • '%' expr
+   90     | expr • '<' expr
+   90     | expr '<' expr •
+   91     | expr • '>' expr
+   92     | expr • tGE expr
+   93     | expr • tLE expr
+   94     | expr • tNE expr
+   95     | expr • tEQ expr
+   96     | expr • tAND expr
+   97     | expr • tOR expr
 
     '+'  shift, and go to state 107
     '-'  shift, and go to state 108
@@ -2969,23 +2919,22 @@ State 148
     $default  reduce using rule 90 (expr)
 
 
-State 149
+State 148
 
-   77 lval: expr • '[' expr ']'
-   84 expr: expr • '+' expr
-   85     | expr • '-' expr
-   86     | expr • '*' expr
-   87     | expr • '/' expr
-   88     | expr • '%' expr
-   89     | expr • '<' expr
-   90     | expr • '>' expr
-   91     | expr • tGE expr
-   91     | expr tGE expr •
-   92     | expr • tLE expr
-   93     | expr • tNE expr
-   94     | expr • tEQ expr
-   95     | expr • tAND expr
-   96     | expr • tOR expr
+   85 expr: expr • '+' expr
+   86     | expr • '-' expr
+   87     | expr • '*' expr
+   88     | expr • '/' expr
+   89     | expr • '%' expr
+   90     | expr • '<' expr
+   91     | expr • '>' expr
+   91     | expr '>' expr •
+   92     | expr • tGE expr
+   93     | expr • tLE expr
+   94     | expr • tNE expr
+   95     | expr • tEQ expr
+   96     | expr • tAND expr
+   97     | expr • tOR expr
 
     '+'  shift, and go to state 107
     '-'  shift, and go to state 108
@@ -2996,23 +2945,22 @@ State 149
     $default  reduce using rule 91 (expr)
 
 
-State 150
+State 149
 
-   77 lval: expr • '[' expr ']'
-   84 expr: expr • '+' expr
-   85     | expr • '-' expr
-   86     | expr • '*' expr
-   87     | expr • '/' expr
-   88     | expr • '%' expr
-   89     | expr • '<' expr
-   90     | expr • '>' expr
-   91     | expr • tGE expr
-   92     | expr • tLE expr
-   92     | expr tLE expr •
-   93     | expr • tNE expr
-   94     | expr • tEQ expr
-   95     | expr • tAND expr
-   96     | expr • tOR expr
+   85 expr: expr • '+' expr
+   86     | expr • '-' expr
+   87     | expr • '*' expr
+   88     | expr • '/' expr
+   89     | expr • '%' expr
+   90     | expr • '<' expr
+   91     | expr • '>' expr
+   92     | expr • tGE expr
+   92     | expr tGE expr •
+   93     | expr • tLE expr
+   94     | expr • tNE expr
+   95     | expr • tEQ expr
+   96     | expr • tAND expr
+   97     | expr • tOR expr
 
     '+'  shift, and go to state 107
     '-'  shift, and go to state 108
@@ -3023,50 +2971,22 @@ State 150
     $default  reduce using rule 92 (expr)
 
 
-State 151
+State 150
 
-   77 lval: expr • '[' expr ']'
-   84 expr: expr • '+' expr
-   85     | expr • '-' expr
-   86     | expr • '*' expr
-   87     | expr • '/' expr
-   88     | expr • '%' expr
-   89     | expr • '<' expr
-   90     | expr • '>' expr
-   91     | expr • tGE expr
-   92     | expr • tLE expr
-   93     | expr • tNE expr
-   94     | expr • tEQ expr
-   94     | expr tEQ expr •
-   95     | expr • tAND expr
-   96     | expr • tOR expr
-
-    '+'  shift, and go to state 107
-    '-'  shift, and go to state 108
-    '*'  shift, and go to state 109
-    '/'  shift, and go to state 110
-    '%'  shift, and go to state 111
-
-    $default  reduce using rule 94 (expr)
-
-
-State 152
-
-   77 lval: expr • '[' expr ']'
-   84 expr: expr • '+' expr
-   85     | expr • '-' expr
-   86     | expr • '*' expr
-   87     | expr • '/' expr
-   88     | expr • '%' expr
-   89     | expr • '<' expr
-   90     | expr • '>' expr
-   91     | expr • tGE expr
-   92     | expr • tLE expr
-   93     | expr • tNE expr
-   93     | expr tNE expr •
-   94     | expr • tEQ expr
-   95     | expr • tAND expr
-   96     | expr • tOR expr
+   85 expr: expr • '+' expr
+   86     | expr • '-' expr
+   87     | expr • '*' expr
+   88     | expr • '/' expr
+   89     | expr • '%' expr
+   90     | expr • '<' expr
+   91     | expr • '>' expr
+   92     | expr • tGE expr
+   93     | expr • tLE expr
+   93     | expr tLE expr •
+   94     | expr • tNE expr
+   95     | expr • tEQ expr
+   96     | expr • tAND expr
+   97     | expr • tOR expr
 
     '+'  shift, and go to state 107
     '-'  shift, and go to state 108
@@ -3077,48 +2997,74 @@ State 152
     $default  reduce using rule 93 (expr)
 
 
-State 153
+State 151
 
-   77 lval: expr • '[' expr ']'
-   84 expr: expr • '+' expr
-   84     | expr '+' expr •
-   85     | expr • '-' expr
-   86     | expr • '*' expr
-   87     | expr • '/' expr
-   88     | expr • '%' expr
-   89     | expr • '<' expr
-   90     | expr • '>' expr
-   91     | expr • tGE expr
-   92     | expr • tLE expr
-   93     | expr • tNE expr
-   94     | expr • tEQ expr
-   95     | expr • tAND expr
-   96     | expr • tOR expr
+   85 expr: expr • '+' expr
+   86     | expr • '-' expr
+   87     | expr • '*' expr
+   88     | expr • '/' expr
+   89     | expr • '%' expr
+   90     | expr • '<' expr
+   91     | expr • '>' expr
+   92     | expr • tGE expr
+   93     | expr • tLE expr
+   94     | expr • tNE expr
+   95     | expr • tEQ expr
+   95     | expr tEQ expr •
+   96     | expr • tAND expr
+   97     | expr • tOR expr
 
+    '+'  shift, and go to state 107
+    '-'  shift, and go to state 108
     '*'  shift, and go to state 109
     '/'  shift, and go to state 110
     '%'  shift, and go to state 111
 
-    $default  reduce using rule 84 (expr)
+    $default  reduce using rule 95 (expr)
 
 
-State 154
+State 152
 
-   77 lval: expr • '[' expr ']'
-   84 expr: expr • '+' expr
-   85     | expr • '-' expr
-   85     | expr '-' expr •
-   86     | expr • '*' expr
-   87     | expr • '/' expr
-   88     | expr • '%' expr
-   89     | expr • '<' expr
-   90     | expr • '>' expr
-   91     | expr • tGE expr
-   92     | expr • tLE expr
-   93     | expr • tNE expr
-   94     | expr • tEQ expr
-   95     | expr • tAND expr
-   96     | expr • tOR expr
+   85 expr: expr • '+' expr
+   86     | expr • '-' expr
+   87     | expr • '*' expr
+   88     | expr • '/' expr
+   89     | expr • '%' expr
+   90     | expr • '<' expr
+   91     | expr • '>' expr
+   92     | expr • tGE expr
+   93     | expr • tLE expr
+   94     | expr • tNE expr
+   94     | expr tNE expr •
+   95     | expr • tEQ expr
+   96     | expr • tAND expr
+   97     | expr • tOR expr
+
+    '+'  shift, and go to state 107
+    '-'  shift, and go to state 108
+    '*'  shift, and go to state 109
+    '/'  shift, and go to state 110
+    '%'  shift, and go to state 111
+
+    $default  reduce using rule 94 (expr)
+
+
+State 153
+
+   85 expr: expr • '+' expr
+   85     | expr '+' expr •
+   86     | expr • '-' expr
+   87     | expr • '*' expr
+   88     | expr • '/' expr
+   89     | expr • '%' expr
+   90     | expr • '<' expr
+   91     | expr • '>' expr
+   92     | expr • tGE expr
+   93     | expr • tLE expr
+   94     | expr • tNE expr
+   95     | expr • tEQ expr
+   96     | expr • tAND expr
+   97     | expr • tOR expr
 
     '*'  shift, and go to state 109
     '/'  shift, and go to state 110
@@ -3127,88 +3073,107 @@ State 154
     $default  reduce using rule 85 (expr)
 
 
-State 155
+State 154
 
-   77 lval: expr • '[' expr ']'
-   84 expr: expr • '+' expr
-   85     | expr • '-' expr
-   86     | expr • '*' expr
-   86     | expr '*' expr •
-   87     | expr • '/' expr
-   88     | expr • '%' expr
-   89     | expr • '<' expr
-   90     | expr • '>' expr
-   91     | expr • tGE expr
-   92     | expr • tLE expr
-   93     | expr • tNE expr
-   94     | expr • tEQ expr
-   95     | expr • tAND expr
-   96     | expr • tOR expr
+   85 expr: expr • '+' expr
+   86     | expr • '-' expr
+   86     | expr '-' expr •
+   87     | expr • '*' expr
+   88     | expr • '/' expr
+   89     | expr • '%' expr
+   90     | expr • '<' expr
+   91     | expr • '>' expr
+   92     | expr • tGE expr
+   93     | expr • tLE expr
+   94     | expr • tNE expr
+   95     | expr • tEQ expr
+   96     | expr • tAND expr
+   97     | expr • tOR expr
+
+    '*'  shift, and go to state 109
+    '/'  shift, and go to state 110
+    '%'  shift, and go to state 111
 
     $default  reduce using rule 86 (expr)
 
 
-State 156
+State 155
 
-   77 lval: expr • '[' expr ']'
-   84 expr: expr • '+' expr
-   85     | expr • '-' expr
-   86     | expr • '*' expr
-   87     | expr • '/' expr
-   87     | expr '/' expr •
-   88     | expr • '%' expr
-   89     | expr • '<' expr
-   90     | expr • '>' expr
-   91     | expr • tGE expr
-   92     | expr • tLE expr
-   93     | expr • tNE expr
-   94     | expr • tEQ expr
-   95     | expr • tAND expr
-   96     | expr • tOR expr
+   85 expr: expr • '+' expr
+   86     | expr • '-' expr
+   87     | expr • '*' expr
+   87     | expr '*' expr •
+   88     | expr • '/' expr
+   89     | expr • '%' expr
+   90     | expr • '<' expr
+   91     | expr • '>' expr
+   92     | expr • tGE expr
+   93     | expr • tLE expr
+   94     | expr • tNE expr
+   95     | expr • tEQ expr
+   96     | expr • tAND expr
+   97     | expr • tOR expr
 
     $default  reduce using rule 87 (expr)
 
 
-State 157
+State 156
 
-   77 lval: expr • '[' expr ']'
-   84 expr: expr • '+' expr
-   85     | expr • '-' expr
-   86     | expr • '*' expr
-   87     | expr • '/' expr
-   88     | expr • '%' expr
-   88     | expr '%' expr •
-   89     | expr • '<' expr
-   90     | expr • '>' expr
-   91     | expr • tGE expr
-   92     | expr • tLE expr
-   93     | expr • tNE expr
-   94     | expr • tEQ expr
-   95     | expr • tAND expr
-   96     | expr • tOR expr
+   85 expr: expr • '+' expr
+   86     | expr • '-' expr
+   87     | expr • '*' expr
+   88     | expr • '/' expr
+   88     | expr '/' expr •
+   89     | expr • '%' expr
+   90     | expr • '<' expr
+   91     | expr • '>' expr
+   92     | expr • tGE expr
+   93     | expr • tLE expr
+   94     | expr • tNE expr
+   95     | expr • tEQ expr
+   96     | expr • tAND expr
+   97     | expr • tOR expr
 
     $default  reduce using rule 88 (expr)
+
+
+State 157
+
+   85 expr: expr • '+' expr
+   86     | expr • '-' expr
+   87     | expr • '*' expr
+   88     | expr • '/' expr
+   89     | expr • '%' expr
+   89     | expr '%' expr •
+   90     | expr • '<' expr
+   91     | expr • '>' expr
+   92     | expr • tGE expr
+   93     | expr • tLE expr
+   94     | expr • tNE expr
+   95     | expr • tEQ expr
+   96     | expr • tAND expr
+   97     | expr • tOR expr
+
+    $default  reduce using rule 89 (expr)
 
 
 State 158
 
    41 vardec: tTYPE_AUTO tIDENTIFIER '=' expr •
-   77 lval: expr • '[' expr ']'
-   84 expr: expr • '+' expr
-   85     | expr • '-' expr
-   86     | expr • '*' expr
-   87     | expr • '/' expr
-   88     | expr • '%' expr
-   89     | expr • '<' expr
-   90     | expr • '>' expr
-   91     | expr • tGE expr
-   92     | expr • tLE expr
-   93     | expr • tNE expr
-   94     | expr • tEQ expr
-   95     | expr • tAND expr
-   96     | expr • tOR expr
+   85 expr: expr • '+' expr
+   86     | expr • '-' expr
+   87     | expr • '*' expr
+   88     | expr • '/' expr
+   89     | expr • '%' expr
+   90     | expr • '<' expr
+   91     | expr • '>' expr
+   92     | expr • tGE expr
+   93     | expr • tLE expr
+   94     | expr • tNE expr
+   95     | expr • tEQ expr
+   96     | expr • tAND expr
+   97     | expr • tOR expr
 
-    '['   shift, and go to state 98
     tOR   shift, and go to state 99
     tAND  shift, and go to state 100
     '<'   shift, and go to state 101
@@ -3229,22 +3194,20 @@ State 158
 State 159
 
    39 vardec: tPUBLIC tIDENTIFIER '=' expr •
-   77 lval: expr • '[' expr ']'
-   84 expr: expr • '+' expr
-   85     | expr • '-' expr
-   86     | expr • '*' expr
-   87     | expr • '/' expr
-   88     | expr • '%' expr
-   89     | expr • '<' expr
-   90     | expr • '>' expr
-   91     | expr • tGE expr
-   92     | expr • tLE expr
-   93     | expr • tNE expr
-   94     | expr • tEQ expr
-   95     | expr • tAND expr
-   96     | expr • tOR expr
+   85 expr: expr • '+' expr
+   86     | expr • '-' expr
+   87     | expr • '*' expr
+   88     | expr • '/' expr
+   89     | expr • '%' expr
+   90     | expr • '<' expr
+   91     | expr • '>' expr
+   92     | expr • tGE expr
+   93     | expr • tLE expr
+   94     | expr • tNE expr
+   95     | expr • tEQ expr
+   96     | expr • tAND expr
+   97     | expr • tOR expr
 
-    '['   shift, and go to state 98
     tOR   shift, and go to state 99
     tAND  shift, and go to state 100
     '<'   shift, and go to state 101
@@ -3274,16 +3237,16 @@ State 160
     tREAD        shift, and go to state 25
     tRECURSION   shift, and go to state 29
     tSIZEOF      shift, and go to state 30
-    tNOT         shift, and go to state 31
-    '('          shift, and go to state 32
+    '+'          shift, and go to state 31
+    '-'          shift, and go to state 32
+    '('          shift, and go to state 33
     '['          shift, and go to state 70
-    '+'          shift, and go to state 34
-    '-'          shift, and go to state 35
+    '~'          shift, and go to state 36
 
     fdef     go to state 40
     fcall    go to state 41
     lval     go to state 47
-    expr     go to state 175
+    expr     go to state 176
     integer  go to state 49
     real     go to state 50
     string   go to state 51
@@ -3299,22 +3262,20 @@ State 161
 State 162
 
    58 opt_initializer: '=' expr •
-   77 lval: expr • '[' expr ']'
-   84 expr: expr • '+' expr
-   85     | expr • '-' expr
-   86     | expr • '*' expr
-   87     | expr • '/' expr
-   88     | expr • '%' expr
-   89     | expr • '<' expr
-   90     | expr • '>' expr
-   91     | expr • tGE expr
-   92     | expr • tLE expr
-   93     | expr • tNE expr
-   94     | expr • tEQ expr
-   95     | expr • tAND expr
-   96     | expr • tOR expr
+   85 expr: expr • '+' expr
+   86     | expr • '-' expr
+   87     | expr • '*' expr
+   88     | expr • '/' expr
+   89     | expr • '%' expr
+   90     | expr • '<' expr
+   91     | expr • '>' expr
+   92     | expr • tGE expr
+   93     | expr • tLE expr
+   94     | expr • tNE expr
+   95     | expr • tEQ expr
+   96     | expr • tAND expr
+   97     | expr • tOR expr
 
-    '['   shift, and go to state 98
     tOR   shift, and go to state 99
     tAND  shift, and go to state 100
     '<'   shift, and go to state 101
@@ -3349,7 +3310,7 @@ State 164
     tTYPE_VOID    shift, and go to state 5
     '['           shift, and go to state 10
 
-    data_type  go to state 176
+    data_type  go to state 177
     func_type  go to state 16
 
 
@@ -3362,33 +3323,33 @@ State 165
     tIDENTIFIER  shift, and go to state 19
     tSTRING      shift, and go to state 20
     tNULLPTR     shift, and go to state 21
-    tWHILE       shift, and go to state 177
-    tIF          shift, and go to state 178
+    tWHILE       shift, and go to state 178
+    tIF          shift, and go to state 179
     tREAD        shift, and go to state 25
     tSTOP        shift, and go to state 26
     tNEXT        shift, and go to state 27
     tRETURN      shift, and go to state 28
     tRECURSION   shift, and go to state 29
     tSIZEOF      shift, and go to state 30
-    tNOT         shift, and go to state 31
-    '('          shift, and go to state 32
+    '+'          shift, and go to state 31
+    '-'          shift, and go to state 32
+    '('          shift, and go to state 33
     '['          shift, and go to state 70
-    '+'          shift, and go to state 34
-    '-'          shift, and go to state 35
-    '{'          shift, and go to state 36
+    '{'          shift, and go to state 35
+    '~'          shift, and go to state 36
 
     $default  reduce using rule 73 (args)
 
-    inst     go to state 179
+    inst     go to state 180
     fdef     go to state 40
     fcall    go to state 41
-    block    go to state 180
-    stop     go to state 181
-    next     go to state 182
-    return   go to state 183
-    args     go to state 184
+    block    go to state 181
+    stop     go to state 182
+    next     go to state 183
+    return   go to state 184
+    args     go to state 185
     lval     go to state 47
-    expr     go to state 185
+    expr     go to state 186
     integer  go to state 49
     real     go to state 50
     string   go to state 51
@@ -3404,33 +3365,33 @@ State 166
     tIDENTIFIER  shift, and go to state 19
     tSTRING      shift, and go to state 20
     tNULLPTR     shift, and go to state 21
-    tWHILE       shift, and go to state 177
-    tIF          shift, and go to state 178
+    tWHILE       shift, and go to state 178
+    tIF          shift, and go to state 179
     tREAD        shift, and go to state 25
     tSTOP        shift, and go to state 26
     tNEXT        shift, and go to state 27
     tRETURN      shift, and go to state 28
     tRECURSION   shift, and go to state 29
     tSIZEOF      shift, and go to state 30
-    tNOT         shift, and go to state 31
-    '('          shift, and go to state 32
+    '+'          shift, and go to state 31
+    '-'          shift, and go to state 32
+    '('          shift, and go to state 33
     '['          shift, and go to state 70
-    '+'          shift, and go to state 34
-    '-'          shift, and go to state 35
-    '{'          shift, and go to state 36
+    '{'          shift, and go to state 35
+    '~'          shift, and go to state 36
 
     $default  reduce using rule 73 (args)
 
-    inst     go to state 186
+    inst     go to state 187
     fdef     go to state 40
     fcall    go to state 41
-    block    go to state 180
-    stop     go to state 181
-    next     go to state 182
-    return   go to state 183
-    args     go to state 184
+    block    go to state 181
+    stop     go to state 182
+    next     go to state 183
+    return   go to state 184
+    args     go to state 185
     lval     go to state 47
-    expr     go to state 185
+    expr     go to state 186
     integer  go to state 49
     real     go to state 50
     string   go to state 51
@@ -3445,9 +3406,9 @@ State 167
 
 State 168
 
-  104 expr: tSIZEOF '(' expr ')' •
+  105 expr: tSIZEOF '(' expr ')' •
 
-    $default  reduce using rule 104 (expr)
+    $default  reduce using rule 105 (expr)
 
 
 State 169
@@ -3460,7 +3421,7 @@ State 169
     tTYPE_VOID    shift, and go to state 5
     '['           shift, and go to state 10
 
-    data_type  go to state 187
+    data_type  go to state 188
     func_type  go to state 16
 
 
@@ -3483,17 +3444,17 @@ State 171
     tREAD        shift, and go to state 25
     tRECURSION   shift, and go to state 29
     tSIZEOF      shift, and go to state 30
-    tNOT         shift, and go to state 31
-    '('          shift, and go to state 32
+    '+'          shift, and go to state 31
+    '-'          shift, and go to state 32
+    '('          shift, and go to state 33
     '['          shift, and go to state 70
-    '+'          shift, and go to state 34
-    '-'          shift, and go to state 35
+    '~'          shift, and go to state 36
 
     $default  reduce using rule 73 (args)
 
     fdef     go to state 40
     fcall    go to state 41
-    args     go to state 188
+    args     go to state 189
     lval     go to state 47
     expr     go to state 130
     integer  go to state 49
@@ -3503,44 +3464,69 @@ State 171
 
 State 172
 
+   78 lval: '(' expr ')' '[' • expr ']'
+
+    tINTEGER     shift, and go to state 17
+    tREAL        shift, and go to state 18
+    tIDENTIFIER  shift, and go to state 19
+    tSTRING      shift, and go to state 20
+    tNULLPTR     shift, and go to state 21
+    tREAD        shift, and go to state 25
+    tRECURSION   shift, and go to state 29
+    tSIZEOF      shift, and go to state 30
+    '+'          shift, and go to state 31
+    '-'          shift, and go to state 32
+    '('          shift, and go to state 33
+    '['          shift, and go to state 70
+    '~'          shift, and go to state 36
+
+    fdef     go to state 40
+    fcall    go to state 41
+    lval     go to state 47
+    expr     go to state 190
+    integer  go to state 49
+    real     go to state 50
+    string   go to state 51
+
+
+State 173
+
    62 block: '{' vardecs instructions '}' •
 
     $default  reduce using rule 62 (block)
 
 
-State 173
+State 174
 
    54 fcall: lval '(' args ')' •
 
     $default  reduce using rule 54 (fcall)
 
 
-State 174
+State 175
 
-   77 lval: expr '[' expr ']' •
+   77 lval: lval '[' expr ']' •
 
     $default  reduce using rule 77 (lval)
 
 
-State 175
+State 176
 
    40 vardec: tPUBLIC tTYPE_AUTO tIDENTIFIER '=' expr •
-   77 lval: expr • '[' expr ']'
-   84 expr: expr • '+' expr
-   85     | expr • '-' expr
-   86     | expr • '*' expr
-   87     | expr • '/' expr
-   88     | expr • '%' expr
-   89     | expr • '<' expr
-   90     | expr • '>' expr
-   91     | expr • tGE expr
-   92     | expr • tLE expr
-   93     | expr • tNE expr
-   94     | expr • tEQ expr
-   95     | expr • tAND expr
-   96     | expr • tOR expr
+   85 expr: expr • '+' expr
+   86     | expr • '-' expr
+   87     | expr • '*' expr
+   88     | expr • '/' expr
+   89     | expr • '%' expr
+   90     | expr • '<' expr
+   91     | expr • '>' expr
+   92     | expr • tGE expr
+   93     | expr • tLE expr
+   94     | expr • tNE expr
+   95     | expr • tEQ expr
+   96     | expr • tAND expr
+   97     | expr • tOR expr
 
-    '['   shift, and go to state 98
     tOR   shift, and go to state 99
     tAND  shift, and go to state 100
     '<'   shift, and go to state 101
@@ -3558,7 +3544,7 @@ State 175
     $default  reduce using rule 40 (vardec)
 
 
-State 176
+State 177
 
    51 type_seq: type_seq ',' data_type •
    52 func_type: data_type • '<' opt_type_seq '>'
@@ -3568,86 +3554,84 @@ State 176
     $default  reduce using rule 51 (type_seq)
 
 
-State 177
+State 178
 
    29 inst: tWHILE • '(' expr ')' inst
 
-    '('  shift, and go to state 189
-
-
-State 178
-
-   30 inst: tIF • '(' expr ')' inst
-
-    '('  shift, and go to state 190
+    '('  shift, and go to state 191
 
 
 State 179
+
+   30 inst: tIF • '(' expr ')' inst
+
+    '('  shift, and go to state 192
+
+
+State 180
 
    16 instruction: tWHILE '(' expr ')' inst •
 
     $default  reduce using rule 16 (instruction)
 
 
-State 180
+State 181
 
    31 inst: block •
 
     $default  reduce using rule 31 (inst)
 
 
-State 181
-
-   32 inst: stop • ';'
-
-    ';'  shift, and go to state 191
-
-
 State 182
 
-   33 inst: next • ';'
-
-    ';'  shift, and go to state 192
-
-
-State 183
-
-   34 inst: return • ';'
+   32 inst: stop • ';'
 
     ';'  shift, and go to state 193
 
 
+State 183
+
+   33 inst: next • ';'
+
+    ';'  shift, and go to state 194
+
+
 State 184
+
+   34 inst: return • ';'
+
+    ';'  shift, and go to state 195
+
+
+State 185
 
    27 inst: args • tWRITE
    28     | args • tWRITELN
    75 args: args • ',' expr
 
-    tWRITE    shift, and go to state 194
-    tWRITELN  shift, and go to state 195
+    tWRITE    shift, and go to state 196
+    tWRITELN  shift, and go to state 197
     ','       shift, and go to state 94
 
 
-State 185
+State 186
 
    26 inst: expr • ';'
    74 args: expr •
-   77 lval: expr • '[' expr ']'
-   84 expr: expr • '+' expr
-   85     | expr • '-' expr
-   86     | expr • '*' expr
-   87     | expr • '/' expr
-   88     | expr • '%' expr
-   89     | expr • '<' expr
-   90     | expr • '>' expr
-   91     | expr • tGE expr
-   92     | expr • tLE expr
-   93     | expr • tNE expr
-   94     | expr • tEQ expr
-   95     | expr • tAND expr
-   96     | expr • tOR expr
+   85 expr: expr • '+' expr
+   86     | expr • '-' expr
+   87     | expr • '*' expr
+   88     | expr • '/' expr
+   89     | expr • '%' expr
+   90     | expr • '<' expr
+   91     | expr • '>' expr
+   92     | expr • tGE expr
+   93     | expr • tLE expr
+   94     | expr • tNE expr
+   95     | expr • tEQ expr
+   96     | expr • tAND expr
+   97     | expr • tOR expr
 
-    '['   shift, and go to state 98
     tOR   shift, and go to state 99
     tAND  shift, and go to state 100
     '<'   shift, and go to state 101
@@ -3661,45 +3645,78 @@ State 185
     '*'   shift, and go to state 109
     '/'   shift, and go to state 110
     '%'   shift, and go to state 111
-    ';'   shift, and go to state 196
+    ';'   shift, and go to state 198
 
     $default  reduce using rule 74 (args)
 
 
-State 186
+State 187
 
    17 instruction: tIF '(' expr ')' inst •
    18            | tIF '(' expr ')' inst • iffalse
 
-    tELIF  shift, and go to state 197
-    tELSE  shift, and go to state 198
+    tELIF  shift, and go to state 199
+    tELSE  shift, and go to state 200
 
     $default  reduce using rule 17 (instruction)
 
-    iffalse  go to state 199
+    iffalse  go to state 201
 
 
-State 187
+State 188
 
    52 func_type: data_type • '<' opt_type_seq '>'
    53 fdef: '(' argdecs ')' tARROW data_type • block
 
     '<'  shift, and go to state 65
-    '{'  shift, and go to state 36
+    '{'  shift, and go to state 35
 
-    block  go to state 200
+    block  go to state 202
 
 
-State 188
+State 189
 
    55 fcall: '(' expr ')' '(' args • ')'
    75 args: args • ',' expr
 
-    ')'  shift, and go to state 201
+    ')'  shift, and go to state 203
     ','  shift, and go to state 94
 
 
-State 189
+State 190
+
+   78 lval: '(' expr ')' '[' expr • ']'
+   85 expr: expr • '+' expr
+   86     | expr • '-' expr
+   87     | expr • '*' expr
+   88     | expr • '/' expr
+   89     | expr • '%' expr
+   90     | expr • '<' expr
+   91     | expr • '>' expr
+   92     | expr • tGE expr
+   93     | expr • tLE expr
+   94     | expr • tNE expr
+   95     | expr • tEQ expr
+   96     | expr • tAND expr
+   97     | expr • tOR expr
+
+    tOR   shift, and go to state 99
+    tAND  shift, and go to state 100
+    '<'   shift, and go to state 101
+    '>'   shift, and go to state 102
+    tGE   shift, and go to state 103
+    tLE   shift, and go to state 104
+    tEQ   shift, and go to state 105
+    tNE   shift, and go to state 106
+    '+'   shift, and go to state 107
+    '-'   shift, and go to state 108
+    '*'   shift, and go to state 109
+    '/'   shift, and go to state 110
+    '%'   shift, and go to state 111
+    ']'   shift, and go to state 204
+
+
+State 191
 
    29 inst: tWHILE '(' • expr ')' inst
 
@@ -3711,22 +3728,22 @@ State 189
     tREAD        shift, and go to state 25
     tRECURSION   shift, and go to state 29
     tSIZEOF      shift, and go to state 30
-    tNOT         shift, and go to state 31
-    '('          shift, and go to state 32
+    '+'          shift, and go to state 31
+    '-'          shift, and go to state 32
+    '('          shift, and go to state 33
     '['          shift, and go to state 70
-    '+'          shift, and go to state 34
-    '-'          shift, and go to state 35
+    '~'          shift, and go to state 36
 
     fdef     go to state 40
     fcall    go to state 41
     lval     go to state 47
-    expr     go to state 202
+    expr     go to state 205
     integer  go to state 49
     real     go to state 50
     string   go to state 51
 
 
-State 190
+State 192
 
    30 inst: tIF '(' • expr ')' inst
 
@@ -3738,72 +3755,72 @@ State 190
     tREAD        shift, and go to state 25
     tRECURSION   shift, and go to state 29
     tSIZEOF      shift, and go to state 30
-    tNOT         shift, and go to state 31
-    '('          shift, and go to state 32
+    '+'          shift, and go to state 31
+    '-'          shift, and go to state 32
+    '('          shift, and go to state 33
     '['          shift, and go to state 70
-    '+'          shift, and go to state 34
-    '-'          shift, and go to state 35
+    '~'          shift, and go to state 36
 
     fdef     go to state 40
     fcall    go to state 41
     lval     go to state 47
-    expr     go to state 203
+    expr     go to state 206
     integer  go to state 49
     real     go to state 50
     string   go to state 51
 
 
-State 191
+State 193
 
    32 inst: stop ';' •
 
     $default  reduce using rule 32 (inst)
 
 
-State 192
+State 194
 
    33 inst: next ';' •
 
     $default  reduce using rule 33 (inst)
 
 
-State 193
+State 195
 
    34 inst: return ';' •
 
     $default  reduce using rule 34 (inst)
 
 
-State 194
+State 196
 
    27 inst: args tWRITE •
 
     $default  reduce using rule 27 (inst)
 
 
-State 195
+State 197
 
    28 inst: args tWRITELN •
 
     $default  reduce using rule 28 (inst)
 
 
-State 196
+State 198
 
    26 inst: expr ';' •
 
     $default  reduce using rule 26 (inst)
 
 
-State 197
+State 199
 
    23 iffalse: tELIF • '(' expr ')' inst
    24        | tELIF • '(' expr ')' inst iffalse
 
-    '('  shift, and go to state 204
+    '('  shift, and go to state 207
 
 
-State 198
+State 200
 
    25 iffalse: tELSE • instruction
 
@@ -3820,16 +3837,16 @@ State 198
     tRETURN      shift, and go to state 28
     tRECURSION   shift, and go to state 29
     tSIZEOF      shift, and go to state 30
-    tNOT         shift, and go to state 31
-    '('          shift, and go to state 32
+    '+'          shift, and go to state 31
+    '-'          shift, and go to state 32
+    '('          shift, and go to state 33
     '['          shift, and go to state 70
-    '+'          shift, and go to state 34
-    '-'          shift, and go to state 35
-    '{'          shift, and go to state 36
+    '{'          shift, and go to state 35
+    '~'          shift, and go to state 36
 
     $default  reduce using rule 73 (args)
 
-    instruction  go to state 205
+    instruction  go to state 208
     fdef         go to state 40
     fcall        go to state 41
     block        go to state 42
@@ -3844,46 +3861,51 @@ State 198
     string       go to state 51
 
 
-State 199
+State 201
 
    18 instruction: tIF '(' expr ')' inst iffalse •
 
     $default  reduce using rule 18 (instruction)
 
 
-State 200
+State 202
 
    53 fdef: '(' argdecs ')' tARROW data_type block •
 
     $default  reduce using rule 53 (fdef)
 
 
-State 201
+State 203
 
    55 fcall: '(' expr ')' '(' args ')' •
 
     $default  reduce using rule 55 (fcall)
 
 
-State 202
+State 204
+
+   78 lval: '(' expr ')' '[' expr ']' •
+
+    $default  reduce using rule 78 (lval)
+
+
+State 205
 
    29 inst: tWHILE '(' expr • ')' inst
-   77 lval: expr • '[' expr ']'
-   84 expr: expr • '+' expr
-   85     | expr • '-' expr
-   86     | expr • '*' expr
-   87     | expr • '/' expr
-   88     | expr • '%' expr
-   89     | expr • '<' expr
-   90     | expr • '>' expr
-   91     | expr • tGE expr
-   92     | expr • tLE expr
-   93     | expr • tNE expr
-   94     | expr • tEQ expr
-   95     | expr • tAND expr
-   96     | expr • tOR expr
+   85 expr: expr • '+' expr
+   86     | expr • '-' expr
+   87     | expr • '*' expr
+   88     | expr • '/' expr
+   89     | expr • '%' expr
+   90     | expr • '<' expr
+   91     | expr • '>' expr
+   92     | expr • tGE expr
+   93     | expr • tLE expr
+   94     | expr • tNE expr
+   95     | expr • tEQ expr
+   96     | expr • tAND expr
+   97     | expr • tOR expr
 
-    '['   shift, and go to state 98
     tOR   shift, and go to state 99
     tAND  shift, and go to state 100
     '<'   shift, and go to state 101
@@ -3897,28 +3919,26 @@ State 202
     '*'   shift, and go to state 109
     '/'   shift, and go to state 110
     '%'   shift, and go to state 111
-    ')'   shift, and go to state 206
+    ')'   shift, and go to state 209
 
 
-State 203
+State 206
 
    30 inst: tIF '(' expr • ')' inst
-   77 lval: expr • '[' expr ']'
-   84 expr: expr • '+' expr
-   85     | expr • '-' expr
-   86     | expr • '*' expr
-   87     | expr • '/' expr
-   88     | expr • '%' expr
-   89     | expr • '<' expr
-   90     | expr • '>' expr
-   91     | expr • tGE expr
-   92     | expr • tLE expr
-   93     | expr • tNE expr
-   94     | expr • tEQ expr
-   95     | expr • tAND expr
-   96     | expr • tOR expr
+   85 expr: expr • '+' expr
+   86     | expr • '-' expr
+   87     | expr • '*' expr
+   88     | expr • '/' expr
+   89     | expr • '%' expr
+   90     | expr • '<' expr
+   91     | expr • '>' expr
+   92     | expr • tGE expr
+   93     | expr • tLE expr
+   94     | expr • tNE expr
+   95     | expr • tEQ expr
+   96     | expr • tAND expr
+   97     | expr • tOR expr
 
-    '['   shift, and go to state 98
     tOR   shift, and go to state 99
     tAND  shift, and go to state 100
     '<'   shift, and go to state 101
@@ -3932,10 +3952,10 @@ State 203
     '*'   shift, and go to state 109
     '/'   shift, and go to state 110
     '%'   shift, and go to state 111
-    ')'   shift, and go to state 207
+    ')'   shift, and go to state 210
 
 
-State 204
+State 207
 
    23 iffalse: tELIF '(' • expr ')' inst
    24        | tELIF '(' • expr ')' inst iffalse
@@ -3948,29 +3968,29 @@ State 204
     tREAD        shift, and go to state 25
     tRECURSION   shift, and go to state 29
     tSIZEOF      shift, and go to state 30
-    tNOT         shift, and go to state 31
-    '('          shift, and go to state 32
+    '+'          shift, and go to state 31
+    '-'          shift, and go to state 32
+    '('          shift, and go to state 33
     '['          shift, and go to state 70
-    '+'          shift, and go to state 34
-    '-'          shift, and go to state 35
+    '~'          shift, and go to state 36
 
     fdef     go to state 40
     fcall    go to state 41
     lval     go to state 47
-    expr     go to state 208
+    expr     go to state 211
     integer  go to state 49
     real     go to state 50
     string   go to state 51
 
 
-State 205
+State 208
 
    25 iffalse: tELSE instruction •
 
     $default  reduce using rule 25 (iffalse)
 
 
-State 206
+State 209
 
    29 inst: tWHILE '(' expr ')' • inst
 
@@ -3979,39 +3999,39 @@ State 206
     tIDENTIFIER  shift, and go to state 19
     tSTRING      shift, and go to state 20
     tNULLPTR     shift, and go to state 21
-    tWHILE       shift, and go to state 177
-    tIF          shift, and go to state 178
+    tWHILE       shift, and go to state 178
+    tIF          shift, and go to state 179
     tREAD        shift, and go to state 25
     tSTOP        shift, and go to state 26
     tNEXT        shift, and go to state 27
     tRETURN      shift, and go to state 28
     tRECURSION   shift, and go to state 29
     tSIZEOF      shift, and go to state 30
-    tNOT         shift, and go to state 31
-    '('          shift, and go to state 32
+    '+'          shift, and go to state 31
+    '-'          shift, and go to state 32
+    '('          shift, and go to state 33
     '['          shift, and go to state 70
-    '+'          shift, and go to state 34
-    '-'          shift, and go to state 35
-    '{'          shift, and go to state 36
+    '{'          shift, and go to state 35
+    '~'          shift, and go to state 36
 
     $default  reduce using rule 73 (args)
 
-    inst     go to state 209
+    inst     go to state 212
     fdef     go to state 40
     fcall    go to state 41
-    block    go to state 180
-    stop     go to state 181
-    next     go to state 182
-    return   go to state 183
-    args     go to state 184
+    block    go to state 181
+    stop     go to state 182
+    next     go to state 183
+    return   go to state 184
+    args     go to state 185
     lval     go to state 47
-    expr     go to state 185
+    expr     go to state 186
     integer  go to state 49
     real     go to state 50
     string   go to state 51
 
 
-State 207
+State 210
 
    30 inst: tIF '(' expr ')' • inst
 
@@ -4020,58 +4040,56 @@ State 207
     tIDENTIFIER  shift, and go to state 19
     tSTRING      shift, and go to state 20
     tNULLPTR     shift, and go to state 21
-    tWHILE       shift, and go to state 177
-    tIF          shift, and go to state 178
+    tWHILE       shift, and go to state 178
+    tIF          shift, and go to state 179
     tREAD        shift, and go to state 25
     tSTOP        shift, and go to state 26
     tNEXT        shift, and go to state 27
     tRETURN      shift, and go to state 28
     tRECURSION   shift, and go to state 29
     tSIZEOF      shift, and go to state 30
-    tNOT         shift, and go to state 31
-    '('          shift, and go to state 32
+    '+'          shift, and go to state 31
+    '-'          shift, and go to state 32
+    '('          shift, and go to state 33
     '['          shift, and go to state 70
-    '+'          shift, and go to state 34
-    '-'          shift, and go to state 35
-    '{'          shift, and go to state 36
+    '{'          shift, and go to state 35
+    '~'          shift, and go to state 36
 
     $default  reduce using rule 73 (args)
 
-    inst     go to state 210
+    inst     go to state 213
     fdef     go to state 40
     fcall    go to state 41
-    block    go to state 180
-    stop     go to state 181
-    next     go to state 182
-    return   go to state 183
-    args     go to state 184
+    block    go to state 181
+    stop     go to state 182
+    next     go to state 183
+    return   go to state 184
+    args     go to state 185
     lval     go to state 47
-    expr     go to state 185
+    expr     go to state 186
     integer  go to state 49
     real     go to state 50
     string   go to state 51
 
 
-State 208
+State 211
 
    23 iffalse: tELIF '(' expr • ')' inst
    24        | tELIF '(' expr • ')' inst iffalse
-   77 lval: expr • '[' expr ']'
-   84 expr: expr • '+' expr
-   85     | expr • '-' expr
-   86     | expr • '*' expr
-   87     | expr • '/' expr
-   88     | expr • '%' expr
-   89     | expr • '<' expr
-   90     | expr • '>' expr
-   91     | expr • tGE expr
-   92     | expr • tLE expr
-   93     | expr • tNE expr
-   94     | expr • tEQ expr
-   95     | expr • tAND expr
-   96     | expr • tOR expr
+   85 expr: expr • '+' expr
+   86     | expr • '-' expr
+   87     | expr • '*' expr
+   88     | expr • '/' expr
+   89     | expr • '%' expr
+   90     | expr • '<' expr
+   91     | expr • '>' expr
+   92     | expr • tGE expr
+   93     | expr • tLE expr
+   94     | expr • tNE expr
+   95     | expr • tEQ expr
+   96     | expr • tAND expr
+   97     | expr • tOR expr
 
-    '['   shift, and go to state 98
     tOR   shift, and go to state 99
     tAND  shift, and go to state 100
     '<'   shift, and go to state 101
@@ -4085,24 +4103,24 @@ State 208
     '*'   shift, and go to state 109
     '/'   shift, and go to state 110
     '%'   shift, and go to state 111
-    ')'   shift, and go to state 211
+    ')'   shift, and go to state 214
 
 
-State 209
+State 212
 
    29 inst: tWHILE '(' expr ')' inst •
 
     $default  reduce using rule 29 (inst)
 
 
-State 210
+State 213
 
    30 inst: tIF '(' expr ')' inst •
 
     $default  reduce using rule 30 (inst)
 
 
-State 211
+State 214
 
    23 iffalse: tELIF '(' expr ')' • inst
    24        | tELIF '(' expr ')' • inst iffalse
@@ -4112,52 +4130,52 @@ State 211
     tIDENTIFIER  shift, and go to state 19
     tSTRING      shift, and go to state 20
     tNULLPTR     shift, and go to state 21
-    tWHILE       shift, and go to state 177
-    tIF          shift, and go to state 178
+    tWHILE       shift, and go to state 178
+    tIF          shift, and go to state 179
     tREAD        shift, and go to state 25
     tSTOP        shift, and go to state 26
     tNEXT        shift, and go to state 27
     tRETURN      shift, and go to state 28
     tRECURSION   shift, and go to state 29
     tSIZEOF      shift, and go to state 30
-    tNOT         shift, and go to state 31
-    '('          shift, and go to state 32
+    '+'          shift, and go to state 31
+    '-'          shift, and go to state 32
+    '('          shift, and go to state 33
     '['          shift, and go to state 70
-    '+'          shift, and go to state 34
-    '-'          shift, and go to state 35
-    '{'          shift, and go to state 36
+    '{'          shift, and go to state 35
+    '~'          shift, and go to state 36
 
     $default  reduce using rule 73 (args)
 
-    inst     go to state 212
+    inst     go to state 215
     fdef     go to state 40
     fcall    go to state 41
-    block    go to state 180
-    stop     go to state 181
-    next     go to state 182
-    return   go to state 183
-    args     go to state 184
+    block    go to state 181
+    stop     go to state 182
+    next     go to state 183
+    return   go to state 184
+    args     go to state 185
     lval     go to state 47
-    expr     go to state 185
+    expr     go to state 186
     integer  go to state 49
     real     go to state 50
     string   go to state 51
 
 
-State 212
+State 215
 
    23 iffalse: tELIF '(' expr ')' inst •
    24        | tELIF '(' expr ')' inst • iffalse
 
-    tELIF  shift, and go to state 197
-    tELSE  shift, and go to state 198
+    tELIF  shift, and go to state 199
+    tELSE  shift, and go to state 200
 
     $default  reduce using rule 23 (iffalse)
 
-    iffalse  go to state 213
+    iffalse  go to state 216
 
 
-State 213
+State 216
 
    24 iffalse: tELIF '(' expr ')' inst iffalse •
 

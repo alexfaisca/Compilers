@@ -45,7 +45,7 @@ SPACE     ([ \t\r]|\n)
 "->"                                return tARROW;
 "begin"                             return tBEGIN;
 "end"                               return tEND;
-"stop"                              return tSTOP;
+"break"                              return tSTOP;
 "next"                              return tNEXT;
 "@"                                 return tRECURSION;
 "return"                            return tRETURN;

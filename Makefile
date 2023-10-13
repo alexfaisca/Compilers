@@ -1,17 +1,10 @@
-#---------------------------------------------------------------
-#             CONFIGURE THESE VARIABLES IF NEEDED
-#---------------------------------------------------------------
 
-ROOT = ${HOME}/compiladores/root
-CDK_INC_DIR = $(ROOT)/usr/include
-CDK_LIB_DIR = $(ROOT)/usr/lib
-CDK_BIN_DIR = $(ROOT)/usr/bin
+ROOT = ${HOME}/Documents/Compilers/
+CDK_INC_DIR = $(ROOT)base/include/
+CDK_LIB_DIR = $(ROOT)base/lib/
+CDK_BIN_DIR = $(ROOT)base/bin/
 
 LANGUAGE=mml
-
-#---------------------------------------------------------------
-# PROBABLY, THERE'S NO NEED TO CHANGE ANYTHING BEYOND THIS POINT
-#---------------------------------------------------------------
 
 L_NAME=$(LANGUAGE)_scanner
 Y_NAME=$(LANGUAGE)_parser
