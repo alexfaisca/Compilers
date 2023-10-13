@@ -15,12 +15,12 @@ The MML compiler is comprised of:
 
 - Compile source code to .asm file
 
-    ./mml test.mml
+    ./mml file.mml
 
 - Assemble .asm file onto .o file
 
-    yasm -felf32 test.asm
+    yasm -felf32 file.asm
     
 - Link .o file onto executable
 
-    ld -m elf_i386 -o test test.o -L base/lib/ -lrts
+    ld -m elf_i386 -o file file.o -L base/lib/ -lrts
