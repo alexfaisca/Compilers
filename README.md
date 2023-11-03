@@ -11,6 +11,8 @@ The MML compiler is comprised of:
 * XML writer (for the middle delivery: `targets/xml_writer.cpp`)
 * Postfix writer (for the final delivery: `targets/postfix_writer.cpp`)
 
+This compiler relies on an external library for the printing to and reading from the terminal operations (linking process detailed below).
+
 ## Usage
 
 - Compile source code to .asm file
